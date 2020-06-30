@@ -3,8 +3,8 @@
 [figma Link](https://www.figma.com/file/Wsvmoow3Z9zG4txMvdIyCu/bill-system-v1?node-id=14%3A2&viewport=1376%2C850%2C0.35816872119903564)
 
 
-## Idea
-collecting electricity, water, and phone bills, and compare the consumption them with neighbors  who registered in the app  depending on common factors  Like  location , number of devices and individuals ,To help individuals rationalize consumption
+## Problem
+The core problem to build this application is collecting electricity, water, and phone bills, and compare the consumption them with neighbors  who registered in the app  depending on common factors  Like  location , number of devices and individuals ,To help individuals rationalize consumption
 
 ## Goals
 - Create Comparison system for utility billing in general.
@@ -13,6 +13,19 @@ collecting electricity, water, and phone bills, and compare the consumption them
 
 
 ## user Story
+1- As a user I can see the landing page 
+2- As a user I can enter the login page.
+3- As a user I can sign up in new accounts.
+4- As a user I can see the home page.
+5- As a user I can choose the type of bills that i want .
+6- As a user I can see the bills for the type I chose .
+7- As a user I can see the  bill statistics.
+8- As a user I can see the contact information page. 
+9- As a user I can see the menu.
+10- As a user I can  choose the profile from the menu and see the profile page .
+11- As a user I can add new  bill.
+12- As a user if I’m logged in I can see another menu.
+
 
 
 ## Database Schema

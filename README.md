@@ -24,7 +24,7 @@ collecting electricity, water, and phone bills, and compare the consumption them
 
 
  ## Team Leader: 
-- [Duaa] (https://github.com/DuaaH)
+- [Duaa](https://github.com/DuaaH)
 
  ## Team Members: 
  - [Banan haj](https://github.com/bananhaj)

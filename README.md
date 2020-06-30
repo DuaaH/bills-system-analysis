@@ -13,18 +13,18 @@ The core problem to build this application is collecting electricity, water, and
 
 
 ## user Story
-1- As a user I can see the landing page 
-2- As a user I can enter the login page.
-3- As a user I can sign up in new accounts.
-4- As a user I can see the home page.
-5- As a user I can choose the type of bills that i want .
-6- As a user I can see the bills for the type I chose .
-7- As a user I can see the  bill statistics.
-8- As a user I can see the contact information page. 
-9- As a user I can see the menu.
-10- As a user I can  choose the profile from the menu and see the profile page .
-11- As a user I can add new  bill.
-12- As a user if I’m logged in I can see another menu.
+1. As a user I can see the landing page 
+2. As a user I can enter the login page.
+3. As a user I can sign up in new accounts.
+4. As a user I can see the home page.
+5. As a user I can choose the type of bills that i want .
+6. As a user I can see the bills for the type I chose .
+7. As a user I can see the  bill statistics.
+8. As a user I can see the contact information page. 
+9. As a user I can see the menu.
+10. As a user I can  choose the profile from the menu and see the profile page .
+11. As a user I can add new  bill.
+12. As a user if I’m logged in I can see another menu.
 
 
 

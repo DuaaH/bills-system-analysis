@@ -36,8 +36,12 @@ as a user I can add my information  like (number of individuals, consumption of 
 
 
 
-## Setup Project
+ ## Setup the project 
+ To setup the app locally follow these steps :
 
+ - Git clone event-booker repo : `git clone`
+ - Install node modules for client side and server side : `npm i`
+ - run this command to run the project : `npm run dev`
 
 
  ## Team Leader: 

@@ -24,6 +24,7 @@
     "xregexp": "^4.3.0"
   },
   "scripts": {
+    "lint": "eslint . --fix",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,5 +45,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
 }

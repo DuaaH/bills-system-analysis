@@ -16,7 +16,8 @@ collecting electricity, water, and phone bills, and compare the consumption them
 
 
 ## Database Schema
-![Bill Db ](https://user-images.githubusercontent.com/7718220/86029106-69422200-ba3b-11ea-9d8f-71662ee5a474.jpg)
+![Bill Db ](https://user-images.githubusercontent.com/7718220/86103001-e36ab900-bac4-11ea-907e-ee5162b3a66c.jpg)
+
 
 
 ## Setup Project

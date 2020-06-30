@@ -11,6 +11,8 @@ The core problem to build this application is collecting electricity, water, and
 - Find solutions to the problem of different consumption.
 - Finding different price problems for the same consumption of water, electricity and telephone.
 
+## User Journey
+as a user I can add my information  like (number of individuals, consumption of utilities) , and compare my bill that I choose with the same bills from the same users with the same background and information and display the result with some charts and statistics, and i can add new bill 
 
 ## user Story
 1. As a user I can see the landing page 

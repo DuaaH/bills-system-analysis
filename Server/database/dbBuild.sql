@@ -4,6 +4,10 @@ BEGIN;
     cascade;
 
 
+DROP EXTENSION
+IF EXISTS "uuid-ossp"
+    cascade;
+
 -- Add Jerusalem Time Zone
 set TIMEZONE
 ='Asia/Jerusalem';
@@ -13,11 +17,12 @@ set TIMEZONE
 -- CREATE EXTENSION
 -- IF NOT EXISTS "uuid-ossp";
 
-
+CREATE EXTENSION
+IF NOT EXISTS "uuid-ossp";
 CREATE TABLE address
 (
     id SERIAL PRIMARY KEY NOT NULL,
-    gid uuid NOT NULL,
+    gid uuid DEFAULT uuid_generate_v4 (),
     city VARCHAR(50) NOT NULL,
     town VARCHAR(50) NOT NULL
 );
@@ -25,7 +30,7 @@ CREATE TABLE address
 CREATE TABLE users
 (
     id SERIAL PRIMARY KEY NOT NULL,
-    gid uuid NOT NULL,
+    gid uuid DEFAULT uuid_generate_v4 (),
     --gid uuid NOT NULL DEFAULT uuid_generate_v4 (),
     display_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -41,6 +46,20 @@ CREATE TABLE users
 );
 
 
+-- ex
+INSERT INTO address
+    (city,town)
+VALUES
+    ('Hebron', 'Hebron');
+INSERT INTO address
+    (city,town)
+VALUES
+    ('Bethlehem', 'Bethlehem');
+
 
 
 COMMIT;
+
+
+
+    

@@ -13,12 +13,13 @@ set TIMEZONE
 ='Asia/Jerusalem';
 
 -- create extension to user uuid_generate_v4 ()
---https://www.postgresql.org/docs/9.4/uuid-ossp.html
--- CREATE EXTENSION
--- IF NOT EXISTS "uuid-ossp";
+-- https://www.postgresqltutorial.com/postgresql-uuid/
 
 CREATE EXTENSION
 IF NOT EXISTS "uuid-ossp";
+
+--------------------------------------------------
+
 CREATE TABLE address
 (
     id SERIAL PRIMARY KEY NOT NULL,

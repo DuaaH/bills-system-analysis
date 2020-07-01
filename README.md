@@ -31,8 +31,7 @@ as a user I can add my information  like (number of individuals, consumption of 
 
 
 ## Database Schema
-![Bill Db  (1)](https://user-images.githubusercontent.com/7718220/86103316-4ceac780-bac5-11ea-8e38-61c30bbbd111.jpg)
-
+![Bill Db  (2)](https://user-images.githubusercontent.com/7718220/86216726-28efba80-bb87-11ea-8492-1a0e1b41980e.jpg)
 
 
 

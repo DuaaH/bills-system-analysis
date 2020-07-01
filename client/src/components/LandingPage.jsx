@@ -8,7 +8,7 @@ export default () => {
       <Grid container item sx={12} justify="center">
         <Paper elevation={3} style={{ width: '100%' }}>
           <Grid item xs={12}>
-            <Typography variant="h6" color="textSecondary">
+            <Typography variant="h6" color="textSecondary" align="center">
               Billbase
             </Typography>
           </Grid>

@@ -2,6 +2,7 @@
 
 [figma Link](https://www.figma.com/file/Wsvmoow3Z9zG4txMvdIyCu/bill-system-v1?node-id=14%3A2&viewport=1376%2C850%2C0.35816872119903564)
 
+[Heroku link]()
 
 ## Problem
 The core problem to build this application is collecting electricity, water, and phone bills, and compare the consumption them with neighbors  who registered in the app  depending on common factors  Like  location , number of devices and individuals ,To help individuals rationalize consumption
@@ -12,7 +13,7 @@ The core problem to build this application is collecting electricity, water, and
 - Finding different price problems for the same consumption of water, electricity and telephone.
 
 ## User Journey
-as a user I can add my information  like (number of individuals, consumption of utilities) , and compare my bill that I choose with the same bills from the same users with the same background and information and display the result with some charts and statistics, and i can add new bill 
+As a user I can add my information  like (number of individuals, consumption of utilities) , and compare my bill that I choose with the same bills from the same users with the same background and information and display the result with some charts and statistics, and i can add new bill 
 
 ## user Story
 1. As a user I can see the landing page 
@@ -28,25 +29,33 @@ as a user I can add my information  like (number of individuals, consumption of 
 11. As a user I can add new  bill.
 12. As a user if I’m logged in I can see another menu.
 
-
-
 ## Database Schema
 ![Bill Db  (2)](https://user-images.githubusercontent.com/7718220/86216726-28efba80-bb87-11ea-8492-1a0e1b41980e.jpg)
 
-
-
- ## Setup the project 
+## Setup the project 
  To setup the app locally follow these steps :
 
  - Git clone bills-system-analysis repo : `git clone`
  - Install node modules for client side and server side : `npm i`
  - run this command to run the project : `npm run dev`
 
+## Used Technologies
+<h4>Front end</h4>
+<ul>
+<li>React</li>
+<li>Material UI</li>
+</ul>
+<h4>Back end</h4>
+<ul>
+<li>PostgreSQL</li>
+<li>Nodejs</li>
+<li>Express</li>
+</ul>
 
- ## Team Leader: 
+## Team Leader: 
 - [Duaa](https://github.com/DuaaH)
 
- ## Team Members: 
+## Team Members: 
  - [Banan haj](https://github.com/bananhaj)
  - [Hanan](https://github.com/Hanan795)
  - [Yakoob](https://github.com/YakoobHammouri)

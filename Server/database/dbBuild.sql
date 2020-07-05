@@ -1,10 +1,10 @@
 BEGIN;
 
-DROP TABLE IF EXISTS users,address , bill , provider
-cascade;
+    DROP TABLE IF EXISTS users,address , bill , provider
+    cascade;
 
 DROP TYPE IF EXISTS providerType
-cascade; 
+cascade;
 
 DROP EXTENSION
 IF EXISTS "uuid-ossp"
@@ -21,7 +21,8 @@ CREATE EXTENSION
 IF NOT EXISTS "uuid-ossp";
 
 --------------------------------------------------
-CREATE TYPE providerType AS ENUM ('Electricity', 'Water', 'Internet', 'Communication');
+CREATE TYPE providerType AS ENUM
+('Electricity', 'Water', 'Internet', 'Communication');
 
 CREATE TABLE address
 (
@@ -46,36 +47,44 @@ CREATE TABLE users
     number_of_devices INTEGER NOT NULL,
     password TEXT NOT NULL,
     email_active boolean,
-    reset_password_code VARCHAR(100) 
+    reset_password_code VARCHAR(100)
 );
 
-CREATE TABLE provider (
- id SERIAL PRIMARY KEY NOT NULL,
- gid uuid DEFAULT uuid_generate_v4 (),
- Name VARCHAR(100) NOT NULL , 
- type providerType,
- address VARCHAR(100) NOT NULL , 
- email VARCHAR(100) NOT NULL,
- phone1 VARCHAR(30) ,
- phone2 VARCHAR(30) ,
- phone3 VARCHAR(30) ,
- po_Box INTEGER 
-);
-
-CREATE TABLE bill 
+CREATE TABLE provider
 (
- id SERIAL PRIMARY KEY NOT NULL,
- gid uuid DEFAULT uuid_generate_v4 (),
- users_id INTEGER NOT NULL,
- FOREIGN KEY (users_id) REFERENCES users (id),
- provider_id INTEGER NOT NULL,
- FOREIGN KEY (provider_id) REFERENCES provider(id), 
-  total_amount FLOAT NOT NULL,
-  bill_DATE TIMESTAMP , 
-  due_DATE TIMESTAMP , 
-  start_DATE TIMESTAMP ,
-  end_DATE  TIMESTAMP,
-  bill_Number INTEGER NOT NULL
-  );
+    id SERIAL PRIMARY KEY NOT NULL,
+    gid uuid DEFAULT uuid_generate_v4 (),
+    Name VARCHAR(100) NOT NULL ,
+    type_supported providerType
+    [],
+    address VARCHAR
+    (100) NOT NULL ,
+    email VARCHAR
+    (100) NOT NULL,
+    phone1 VARCHAR
+    (30) ,
+    phone2 VARCHAR
+    (30) ,
+    phone3 VARCHAR
+    (30) ,
+    po_Box INTEGER
+);
 
-COMMIT;
+    CREATE TABLE bill
+    (
+        id SERIAL PRIMARY KEY NOT NULL,
+        gid uuid DEFAULT uuid_generate_v4 (),
+        users_id INTEGER NOT NULL,
+        FOREIGN KEY (users_id) REFERENCES users (id),
+        provider_id INTEGER NOT NULL,
+        FOREIGN KEY (provider_id) REFERENCES provider(id),
+        type providerType,
+        total_amount FLOAT NOT NULL,
+        bill_DATE TIMESTAMP ,
+        due_DATE TIMESTAMP ,
+        start_DATE TIMESTAMP ,
+        end_DATE TIMESTAMP,
+        bill_Number INTEGER NOT NULL
+    );
+
+    COMMIT;

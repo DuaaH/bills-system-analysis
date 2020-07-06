@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
-  res.send('Server is Running');
-});
+const {  getLastBill } = require('./Bill');
+
+router.get('/api/bill/:bill_type', getLastBill )
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const router = require('express').Router();
+const { logIn } = require('./User');
 
-router.get('/', (req, res) => {
-  res.send('Server is Running');
-});
+router.post('/api/login', logIn);
 
 module.exports = router;

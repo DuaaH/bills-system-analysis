@@ -1,15 +1,3 @@
-const ROLE = {
-  ADMIN: 'admin',
-  USER: 'user',
-};
-
-const EVENTSTATUS = {
-  OPEN: 'open',
-  FINISED: 'finised',
-  CANCELED: 'canceled',
-  STARTED: 'started',
-};
-
 const PROVIDERTYPE = {
   Electricity: 'Electricity',
   Water: 'Water',
@@ -17,4 +5,4 @@ const PROVIDERTYPE = {
   Communication: 'Communication',
 };
 
-module.exports = { ROLE, EVENTSTATUS };
+module.exports = { PROVIDERTYPE };

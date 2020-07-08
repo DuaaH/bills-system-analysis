@@ -23,7 +23,7 @@ module.exports = (req, res) => {
   // If user type his/her email incorrectly
   if (error !== undefined) {
     return res
-      .status(400)
+      .status(403)
       .json(
         faildLoginMessage(
           null,
@@ -43,7 +43,7 @@ module.exports = (req, res) => {
       // If the email isn't in the database
       if (!result || result.rows.length === 0) {
         res
-          .status(404)
+          .status(403)
           .json(faildLoginMessage(null, 'Make sure of your email or password'));
       }
 

@@ -7,7 +7,8 @@ const {
 
   module.exports = (req, res) => { 
       const {bill_type } = req.params ;
-      getLastBill(bill_type)
+      const {limit} = req.body;
+      getLastBill(bill_type, limit)
       .then((result) => {
         return res.status(200).json(successMessage(result.rows));
       })
@@ -17,8 +18,5 @@ const {
           internalErrorMessage(null, 'Error Happens in get Bill Type '),
         );
       });
-
-
-
 
   }

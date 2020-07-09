@@ -21,19 +21,19 @@ BEGIN;
     INSERT INTO provider
         ( Name , type_supported , address , email , phone1 , phone2, phone3, po_Box)
     VALUES
-        ('Hebron electric power', '{"Electricity"}' , 'Hebron' , 'info@hebo-pal.com', '022292818', '0598144445' , '022292821' , 818),
+        ('Hebron electric power', '{"electricity"}' , 'Hebron' , 'info@hebo-pal.com', '022292818', '0598144445' , '022292821' , 818),
 
-        ('Hebron Municipality' , '{"Water"}' , 'Hebron' , 'pr@hebron-city.ps', '022228121' , '022228293' , null, 6 ),
-        ('Hadara' , '{"Internet"}' , 'Hebron', 'wecare@hadara.ps', '1700100100', '1700100101' , 0 , null),
-        ('Bethlehem electric power' , '{"Electricity"}' , 'Bethlehem' , 'info@jdeco.net' , '2744260' , '2760810' , '2770905' , null ),
-        ('Bethlehem Municipality' , '{"Water"}', ' Bethlehem', 'info@bethlehem-city.org', '022741322' , '1700660660' , '022741327', 48);
+        ('Hebron Municipality' , '{"water"}' , 'Hebron' , 'pr@hebron-city.ps', '022228121' , '022228293' , null, 6 ),
+        ('Hadara' , '{"internet"}' , 'Hebron', 'wecare@hadara.ps', '1700100100', '1700100101' , 0 , null),
+        ('Bethlehem electric power' , '{"electricity"}' , 'Bethlehem' , 'info@jdeco.net' , '2744260' , '2760810' , '2770905' , null ),
+        ('Bethlehem Municipality' , '{"water"}', ' Bethlehem', 'info@bethlehem-city.org', '022741322' , '1700660660' , '022741327', 48);
 
     INSERT INTO bill
         (users_id, provider_id,type ,total_amount, bill_DATE, due_DATE, start_DATE, end_DATE , bill_Number)
     VALUES
-        (1 , 1 , 'Electricity', 255 , '2020-05-19' , '2020-05-22' , '2020-05-23' , '2020-05-25' , 306) ,
-        (2 , 2 , 'Water', 398.5 , '2020-03-7' , '2020-03-8', '2020-03-10', '2020-04-15', 507 ),
-        (3, 3, 'Internet', 255 , '2020-02-8' , ' 2020-02-17'   , '2020-02-20' , '2020-02-25' , 306) ,
-        (4 , 4 , 'Communication' , 574 , '2020-04-20', '2020-04-25', '2020-04-28', '2020-04-30' , 208 );
+        (1 , 1 , 'electricity', 255 , '2020-05-19' , '2020-05-22' , '2020-05-23' , '2020-05-25' , 306) ,
+        (2 , 2 , 'water', 398.5 , '2020-03-7' , '2020-03-8', '2020-03-10', '2020-04-15', 507 ),
+        (3, 3, 'internet', 255 , '2020-02-8' , ' 2020-02-17'   , '2020-02-20' , '2020-02-25' , 306) ,
+        (4 , 4 , 'communication' , 574 , '2020-04-20', '2020-04-25', '2020-04-28', '2020-04-30' , 208 );
 
     COMMIT;

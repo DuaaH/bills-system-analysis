@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
 import { Grid, Box, Typography, Paper, IconButton } from '@material-ui/core';
 import { AddCircleOutline } from '@material-ui/icons';
 import LoaderProgress from '../../common-components/LoaderProgress';
@@ -30,10 +31,12 @@ export default () => {
       });
   }, []);
 
-  const BillCard = (index, imgSrc) => (
-    <Paper key={index} className={classes.root} elevation={3}>
-      <img src={imgSrc} className={classes.imageType} />
-    </Paper>
+  const BillCard = (index, type, imgSrc) => (
+    <Link to={`/bill/${type}`}>
+      <Paper key={index} className={classes.root} elevation={3}>
+        <img src={imgSrc} className={classes.imageType} />
+      </Paper>
+    </Link>
   );
 
   const buildBillType = (types) => {
@@ -46,13 +49,13 @@ export default () => {
       }
       switch (type.type.toLocaleLowerCase()) {
         case 'electricity':
-          return BillCard(index, Electricity);
+          return BillCard(index, 'electricity', Electricity);
         case 'water':
-          return BillCard(index, Water);
+          return BillCard(index, 'water', Water);
         case 'internet':
-          return BillCard(index, Internet);
+          return BillCard(index, 'internet', Internet);
         case 'communication':
-          return BillCard(index, Communication);
+          return BillCard(index, 'communication', Communication);
         default:
           return (
             <Paper key={index} className={classes.root} elevation={3}>

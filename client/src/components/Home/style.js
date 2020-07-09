@@ -5,8 +5,8 @@ export default makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   root: {
-    width: 120,
-    height: 120,
+    width: 150,
+    height: 150,
     backgroundColor: theme.palette.secondary.main,
     borderRadius: 15,
     display: 'flex',
@@ -15,12 +15,12 @@ export default makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   addBtnGrid: {
+    // display: 'none',
     paddingRight: 23,
     marginTop: -8,
     position: 'absolute',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
-  addIcon: { fontSize: 40 },
-  fab: {},
+  addIcon: { fontSize: 100, color: '#fff' },
 }));

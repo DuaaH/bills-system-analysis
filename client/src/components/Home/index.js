@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
 import { Grid, Box, Typography, Paper, IconButton } from '@material-ui/core';
 import { AddCircleOutline } from '@material-ui/icons';
+import LoaderProgress from '../../common-components/LoaderProgress';
 import Water from '../../assets/water.svg';
 import Communication from '../../assets/communication.svg';
 import Electricity from '../../assets/electricity.svg';
@@ -9,46 +12,93 @@ import Styles from './style';
 
 export default () => {
   const classes = Styles();
+  const [userBillType, setUserBillType] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [displayBlock, setIsDisplayBlock] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get('/api/home')
+      .then((result) => {
+        setUserBillType(result.data.Result);
+      })
+      .catch((err) => {
+        if (err.response.data) {
+          swal('Error', err.response.data.message, 'error');
+        }
+        setIsLoading(false);
+      });
+  }, []);
+
+  const BillCard = (index, imgSrc) => (
+    <Paper key={index} className={classes.root} elevation={3}>
+      <img src={imgSrc} className={classes.imageType} />
+    </Paper>
+  );
+
+  const buildBillType = (types) => {
+    if (types.length === 0) {
+      return [];
+    }
+    return types.map((type, index) => {
+      if (types.length - 1 === index && isLoading) {
+        setIsLoading(false);
+      }
+      switch (type.type.toLocaleLowerCase()) {
+        case 'electricity':
+          return BillCard(index, Electricity);
+        case 'water':
+          return BillCard(index, Water);
+        case 'internet':
+          return BillCard(index, Internet);
+        case 'communication':
+          return BillCard(index, Communication);
+        default:
+          return (
+            <Paper key={index} className={classes.root} elevation={3}>
+              <Typography variant="h5">Unknown</Typography>
+            </Paper>
+          );
+      }
+    });
+  };
+
+  const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
+
   return (
     <Box component="div" p={3} width={1}>
-      <Grid container item sx={12} justify="center">
-        <Grid item container xs={12}>
-          <Typography variant="h5" color="textPrimary" align="left">
-            Billbase
-          </Typography>
+      <LoaderProgress isLoading={isLoading} />
+      <Box component="div" display={displayStatus} width={1}>
+        <Grid container item sx={12} justify="center">
+          <Grid item container xs={12}>
+            <Typography variant="h4" color="textPrimary" align="left">
+              Billbase
+            </Typography>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            justify="space-evenly"
+            className={classes.typeContainer}
+            direction="row"
+            alignItems="center"
+          >
+            {buildBillType(userBillType)}
+          </Grid>
+          <Grid
+            item
+            container
+            xs={6}
+            justify="flex-end"
+            className={classes.addBtnGrid}
+          >
+            <IconButton color="secondary" aria-label="add an alarm">
+              <AddCircleOutline className={classes.addIcon} />
+            </IconButton>
+          </Grid>
         </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-          justify="space-evenly"
-          className={classes.typeContainer}
-        >
-          <Paper className={classes.root} elevation={3}>
-            <img src={Water} className={classes.imageType} />
-          </Paper>
-          <Paper className={classes.root} elevation={3}>
-            <img src={Electricity} className={classes.imageType} />
-          </Paper>
-          <Paper className={classes.root} elevation={3}>
-            <img src={Communication} className={classes.imageType} />
-          </Paper>
-          <Paper className={classes.root} elevation={3}>
-            <img src={Internet} className={classes.imageType} />
-          </Paper>
-        </Grid>
-        <Grid
-          item
-          container
-          xs={6}
-          justify="flex-end"
-          className={classes.addBtnGrid}
-        >
-          <IconButton color="secondary" aria-label="add an alarm">
-            <AddCircleOutline className={classes.addIcon} />
-          </IconButton>
-        </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 };

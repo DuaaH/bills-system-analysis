@@ -22,6 +22,12 @@ export default () => {
       .get('/api/home')
       .then((result) => {
         setUserBillType(result.data.Result);
+        if (!result.data.Result) {
+          setIsLoading(false);
+        }
+        if (result.data.Result.length === 0) {
+          setIsLoading(false);
+        }
       })
       .catch((err) => {
         if (err.response.data) {
@@ -40,6 +46,9 @@ export default () => {
   );
 
   const buildBillType = (types) => {
+    if (!types) {
+      return [];
+    }
     if (types.length === 0) {
       return [];
     }
@@ -87,6 +96,9 @@ export default () => {
             direction="row"
             alignItems="center"
           >
+            <Typography variant="h4" color="textPrimary" align="center">
+              Billbase
+            </Typography>
             {buildBillType(userBillType)}
           </Grid>
           <Grid
@@ -96,9 +108,11 @@ export default () => {
             justify="flex-end"
             className={classes.addBtnGrid}
           >
-            <IconButton color="secondary" aria-label="add an alarm">
-              <AddCircleOutline className={classes.addIcon} />
-            </IconButton>
+            <Link to="/new-bill">
+              <IconButton color="secondary" aria-label="add an alarm">
+                <AddCircleOutline className={classes.addIcon} />
+              </IconButton>
+            </Link>
           </Grid>
         </Grid>
       </Box>

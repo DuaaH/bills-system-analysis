@@ -15,7 +15,7 @@ export default () => {
   const classes = Styles();
   const [userBillType, setUserBillType] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [displayBlock, setIsDisplayBlock] = useState(true);
+  const [displayBlock, setIsDisplayBlock] = useState(false);
 
   useEffect(() => {
     axios
@@ -24,9 +24,11 @@ export default () => {
         setUserBillType(result.data.Result);
         if (!result.data.Result) {
           setIsLoading(false);
+          setIsDisplayBlock(true);
         }
         if (result.data.Result.length === 0) {
           setIsLoading(false);
+          setIsDisplayBlock(true);
         }
       })
       .catch((err) => {
@@ -34,6 +36,7 @@ export default () => {
           swal('Error', err.response.data.message, 'error');
         }
         setIsLoading(false);
+        setIsDisplayBlock(true);
       });
   }, []);
 
@@ -55,6 +58,7 @@ export default () => {
     return types.map((type, index) => {
       if (types.length - 1 === index && isLoading) {
         setIsLoading(false);
+        setIsDisplayBlock(true);
       }
       switch (type.type.toLocaleLowerCase()) {
         case 'electricity':
@@ -78,9 +82,14 @@ export default () => {
   const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
 
   const billLengthStatus =
-    !isLoading && (!userBillType || userBillType.length) === 0
+    !isLoading && (!userBillType || userBillType.length === 0)
       ? 'block'
       : 'none';
+
+  const billAddClassName =
+    !isLoading && (!userBillType || userBillType.length <= 3)
+      ? classes.addBtnGridFixPosition
+      : '';
 
   return (
     <Box component="div" p={3} width={1}>
@@ -92,7 +101,6 @@ export default () => {
               Billbase
             </Typography>
           </Grid>
-          <Grid container item xs={12} justify="center"></Grid>
           <Grid
             container
             item
@@ -124,9 +132,10 @@ export default () => {
           <Grid
             item
             container
-            xs={6}
+            xs={12}
             justify="flex-end"
-            className={classes.addBtnGrid}
+            className={billAddClassName}
+            id="444"
           >
             <Link to="/new-bill">
               <IconButton color="secondary" aria-label="add an alarm">

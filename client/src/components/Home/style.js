@@ -14,12 +14,11 @@ export default makeStyles((theme) => ({
     alignContent: 'center',
     margin: theme.spacing(1),
   },
-  addBtnGrid: {
-    paddingRight: 23,
-    marginTop: -8,
+
+  addBtnGridFixPosition: {
     position: 'absolute',
     bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    right: theme.spacing(1),
   },
   addIcon: { fontSize: 100, color: '#fff' },
   BillNullText: {

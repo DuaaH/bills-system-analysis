@@ -77,6 +77,11 @@ export default () => {
 
   const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
 
+  const billLengthStatus =
+    !isLoading && (!userBillType || userBillType.length) === 0
+      ? 'block'
+      : 'none';
+
   return (
     <Box component="div" p={3} width={1}>
       <LoaderProgress isLoading={isLoading} />
@@ -87,6 +92,7 @@ export default () => {
               Billbase
             </Typography>
           </Grid>
+          <Grid container item xs={12} justify="center"></Grid>
           <Grid
             container
             item
@@ -96,10 +102,24 @@ export default () => {
             direction="row"
             alignItems="center"
           >
-            <Typography variant="h4" color="textPrimary" align="center">
-              Billbase
-            </Typography>
             {buildBillType(userBillType)}
+          </Grid>
+          <Grid>
+            <Box
+              component="div"
+              display={billLengthStatus}
+              width={1}
+              className={classes.BillNullText}
+            >
+              <Typography
+                variant="h4"
+                color="textPrimary"
+                align="center"
+                display="none"
+              >
+                Please Add Bills
+              </Typography>
+            </Box>
           </Grid>
           <Grid
             item

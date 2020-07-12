@@ -15,7 +15,6 @@ export default makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   addBtnGrid: {
-    // display: 'none',
     paddingRight: 23,
     marginTop: -8,
     position: 'absolute',
@@ -23,4 +22,7 @@ export default makeStyles((theme) => ({
     right: theme.spacing(2),
   },
   addIcon: { fontSize: 100, color: '#fff' },
+  BillNullText: {
+    marginTop: '50%',
+  },
 }));

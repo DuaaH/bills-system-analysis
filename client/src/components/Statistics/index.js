@@ -123,9 +123,6 @@ export default (props) => {
 
   const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
   const displayHistory = !historyBill || !historyBill.length ? 'none' : 'block';
-
-  console.log(!historyBill.length, historyBill.length);
-  console.log(displayHistory);
   return (
     <Box component="div" p={3} width={1}>
       <LoaderProgress isLoading={isLoading} />

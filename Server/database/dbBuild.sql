@@ -22,7 +22,7 @@ IF NOT EXISTS "uuid-ossp";
 
 --------------------------------------------------
 CREATE TYPE providerType AS ENUM
-('Electricity', 'Water', 'Internet', 'Communication');
+('electricity', 'water', 'internet', 'communication');
 
 CREATE TABLE address
 (

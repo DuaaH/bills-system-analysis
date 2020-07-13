@@ -1,8 +1,8 @@
 const PROVIDERTYPE = {
-  Electricity: 'Electricity',
-  Water: 'Water',
-  Internet: 'Internet',
-  Communication: 'Communication',
+  electricity: 'electricity',
+  water: 'water',
+  internet: 'internet',
+  communication: 'communication',
 };
 
 module.exports = { PROVIDERTYPE };

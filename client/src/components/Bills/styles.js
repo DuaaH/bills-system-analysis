@@ -19,8 +19,6 @@ export default makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   statisticsLink: {
-    // display: 'flex',
-    // justifyContent: 'flex-end'
-    marginTop: '50%',
+    marginBottom: theme.spacing(0.5),
   },
 }));

@@ -115,6 +115,72 @@ export default () => {
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.conentFont}>
+                      <Grid tiem container xs={12} alignItems="flex-end">
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Number"
+                          id="standard-start-adornment"
+                          value="254"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                #
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Amount"
+                          id="standard-start-adornment"
+                          value="349"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                ₪
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Date"
+                          id="standard-start-adornment"
+                          value="20/12/2020"
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Due Date"
+                          id="standard-start-adornment"
+                          value="20/10/2020"
+                        />
+                        <Box
+                          component="span"
+                          className={classes.statisticsLink}
+                        >
+                          <Link to="/bill/electricity/statistics/129e4e27-89a0-415e-903a-b7090f9c06f9">
+                            Statistics
+                          </Link>
+                        </Box>
+                      </Grid>
+                    </AccordionDetails>
+                  </Accordion>
+                  <Accordion>
+                    <AccordionSummary
+                      className={classes.accordionBackground}
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography className={classes.heading}>
+                        Bill 2
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails className={classes.conentFont}>
                       <Grid>
                         <TextField
                           className={classes.textFieldStyle}
@@ -169,24 +235,70 @@ export default () => {
                       </Grid>
                     </AccordionDetails>
                   </Accordion>
-
                   <Accordion>
                     <AccordionSummary
                       className={classes.accordionBackground}
                       expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
-                      id="panel2a-header"
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
                     >
                       <Typography className={classes.heading}>
-                        Bill 2
+                        Bill 3
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.conentFont}>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse malesuada lacus ex, sit amet blandit leo
-                        lobortis eget.
-                      </Typography>
+                      <Grid>
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Number"
+                          id="standard-start-adornment"
+                          value="254"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                #
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Amount"
+                          id="standard-start-adornment"
+                          value="349"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                ₪
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Date"
+                          id="standard-start-adornment"
+                          value="20/12/2020"
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Due Date"
+                          id="standard-start-adornment"
+                          value="20/10/2020"
+                        />
+                        <Box
+                          component="span"
+                          className={classes.statisticsLink}
+                        >
+                          <Link to="/bill/electricity/statistics/129e4e27-89a0-415e-903a-b7090f9c06f9">
+                            Statistics
+                          </Link>
+                        </Box>
+                      </Grid>
                     </AccordionDetails>
                   </Accordion>
                 </TabPanel>

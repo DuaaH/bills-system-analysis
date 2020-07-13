@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Grid, Box, Typography, TextField, Button } from '@material-ui/core';
-
-import LoaderProgress from '../../common-components/LoaderProgress';
 import Style from './style';
 
-function Login() {
+function Login(props) {
   const classes = Style();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -21,7 +18,9 @@ function Login() {
       .post('/api/login', data)
       .then((result) => {
         if (result.status === 200) {
-          this.props.history.push('/home');
+          props.history.push({
+            pathname: '/home',
+          });
         }
       })
       .catch((err) => {
@@ -31,7 +30,6 @@ function Login() {
 
   return (
     <Box component="div" p={0} width={1}>
-      <LoaderProgress isLoading={isLoading} />
       <Grid container item sx={12} justify="center">
         <Grid item xs={12}>
           <Typography

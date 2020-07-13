@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
     padding: '0',
   },
   title: {
-    margin: '10% 0 0 10%',
+    margin: '10% 0 0 4%',
   },
   loginBtn: {
     height: 50,
@@ -22,6 +22,7 @@ export default makeStyles((theme) => ({
   },
   errorMessage: {
     color: '#FFF',
+    marginBottom: '5%',
   },
   loginForm: {
     width: '100%',

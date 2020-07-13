@@ -10,12 +10,16 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  TextField,
+  InputAdornment,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LoaderProgress from '../../common-components/LoaderProgress';
 import Style from './styles';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme as theme } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,7 +50,7 @@ function a11yProps(index) {
 
 export default () => {
   const classes = Style();
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [displayBlock, setIsDisplayBlock] = useState(false);
 
@@ -99,35 +103,85 @@ export default () => {
                 onChangeIndex={handleChangeIndex}
               >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                  <Accordion>
+                  <Accordion defaultExpanded>
                     <AccordionSummary
+                      className={classes.accordionBackground}
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1a-content"
                       id="panel1a-header"
                     >
                       <Typography className={classes.heading}>
-                        Accordion 1
+                        Bill 1
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse malesuada lacus ex, sit amet blandit leo
-                        lobortis eget.
-                      </Typography>
+                    <AccordionDetails className={classes.conentFont}>
+                      <Grid>
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Number"
+                          id="standard-start-adornment"
+                          value="254"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                #
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Amount"
+                          id="standard-start-adornment"
+                          value="349"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                ₪
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Date"
+                          id="standard-start-adornment"
+                          value="20/12/2020"
+                        />
+                        <TextField
+                          className={classes.textFieldStyle}
+                          disabled
+                          label="Due Date"
+                          id="standard-start-adornment"
+                          value="20/10/2020"
+                        />
+                        <Box
+                          component="span"
+                          className={classes.statisticsLink}
+                        >
+                          <Link to="/bill/electricity/statistics/129e4e27-89a0-415e-903a-b7090f9c06f9">
+                            Statistics
+                          </Link>
+                        </Box>
+                      </Grid>
                     </AccordionDetails>
                   </Accordion>
+
                   <Accordion>
                     <AccordionSummary
+                      className={classes.accordionBackground}
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel2a-content"
                       id="panel2a-header"
                     >
                       <Typography className={classes.heading}>
-                        Accordion 2
+                        Bill 2
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.conentFont}>
                       <Typography>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Suspendisse malesuada lacus ex, sit amet blandit leo

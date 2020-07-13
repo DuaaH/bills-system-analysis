@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import {
   Grid,
   Box,
@@ -13,36 +13,119 @@ import {
 } from '@material-ui/core';
 import { teal } from '@material-ui/core/colors';
 import { Bar } from 'react-chartjs-2';
+import swal from 'sweetalert';
 import LoaderProgress from '../../common-components/LoaderProgress';
 import Ils from '../../assets/ils.svg';
 import Styles from './style';
 
-const data = {
-  labels: ['ME', 'Person1', 'Person2', 'Person3', 'Person4', 'Person5'],
-  datasets: [
-    {
-      label: 'Consumption',
-      data: [200, 400, 600, 800, 1000, 1500],
-      backgroundColor: Object.values(teal),
-      borderColor: '#fff',
-      borderWidth: 1,
-    },
-  ],
-};
+// const data = {
+//   labels: ['ME', 'Person1', 'Person2', 'Person3', 'Person4', 'Person5'],
+//   datasets: [
+//     {
+//       label: 'Consumption',
+//       data: [200, 400, 600, 800, 1000, 1500],
+//       backgroundColor: Object.values(teal),
+//       borderColor: '#fff',
+//       borderWidth: 1,
+//     },
+//   ],
+// };
 
 export default (props) => {
   const classes = Styles();
 
-  const [chartData, setChartData] = useState(data);
-  const [isLoading, setIsLoading] = useState(false);
+  const [chartData, setChartData] = useState({});
+  const [historyBill, setHistoryBill] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [displayBlock, setIsDisplayBlock] = useState(true);
 
+  const getBillHistory = () =>
+    axios.get(`/api/bill/${props.match.params.bill_type}`);
+
+  const getBillStatistics = () =>
+    axios.get(
+      `/api/bill/${props.match.params.bill_type}/statistics/${props.match.params.billId}`,
+    );
+
   useEffect(() => {
-    const billId = props.match.params.billId;
+    Promise.all([getBillHistory(), getBillStatistics()])
+      .then((results) => {
+        const history = results[0];
+        const statistics = results[1];
+        setHistoryBill(history.data.Result);
+
+        const chart = statistics.data.Result;
+        chart.datasets[0].backgroundColor = Object.values(teal).splice(
+          2,
+          Object.values(teal).length,
+        );
+
+        setChartData(chart);
+
+        if (!history.data.Result) {
+          setIsLoading(false);
+        }
+        if (history.data.Result.length === 0) {
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (err && err.response && err.response.data) {
+          swal('Error', err.response.data.message, 'error');
+        }
+        setIsLoading(false);
+        console.log(err);
+      });
   }, []);
 
-  const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
+  const BuildBillHistory = (history) => {
+    if (!history) {
+      return [];
+    }
+    if (history.length === 0) {
+      return [];
+    }
 
+    return history.map((bill, index) => {
+      if (history.length - 1 === index && isLoading) {
+        setIsLoading(false);
+      }
+
+      const dueDate = new Date(bill.due_date);
+
+      return (
+        <Fragment key={index}>
+          <ListItem>
+            <ListItemText>
+              <Typography component="span" variant="subtitle1">
+                {dueDate.toLocaleString('default', { month: 'long' })}
+              </Typography>
+              <Typography
+                component="span"
+                variant="overline"
+                className={classes.yearText}
+              >
+                {dueDate.getFullYear()}
+              </Typography>
+            </ListItemText>
+            <ListItemSecondaryAction>
+              <span>
+                <img src={Ils} />
+              </span>
+              <span>{bill.total_amount}</span>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <Divider />
+        </Fragment>
+      );
+    });
+  };
+
+  const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
+  const displayHistory = !historyBill || !historyBill.length ? 'none' : 'block';
+
+  console.log(!historyBill.length, historyBill.length);
+  console.log(displayHistory);
   return (
     <Box component="div" p={3} width={1}>
       <LoaderProgress isLoading={isLoading} />
@@ -88,120 +171,14 @@ export default (props) => {
             direction="row"
             alignItems="center"
           >
-            <Box width={1} mt={3}>
+            <Box width={1} mt={3} display={displayHistory}>
               <Typography variant="h5" color="textPrimary" align="left">
                 History
               </Typography>
             </Box>
-            <Box width={1} mt={1}>
+            <Box width={1} mt={1} display={displayHistory}>
               <Paper className={classes.historyList}>
-                <List>
-                  <ListItem>
-                    <ListItemText>
-                      <Typography component="span" variant="subtitle1">
-                        June
-                      </Typography>
-                      <Typography
-                        component="span"
-                        variant="overline"
-                        className={classes.yearText}
-                      >
-                        2020
-                      </Typography>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span>
-                        <img src={Ils} />
-                      </span>
-                      <span>3000</span>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider />
-                  <ListItem>
-                    <ListItemText>
-                      <Typography component="span" variant="subtitle1">
-                        June
-                      </Typography>
-                      <Typography
-                        component="span"
-                        variant="overline"
-                        className={classes.yearText}
-                      >
-                        2020
-                      </Typography>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span>
-                        <img src={Ils} />
-                      </span>
-                      <span>3000</span>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider />
-                  <ListItem>
-                    <ListItemText>
-                      <Typography component="span" variant="subtitle1">
-                        June
-                      </Typography>
-                      <Typography
-                        component="span"
-                        variant="overline"
-                        className={classes.yearText}
-                      >
-                        2020
-                      </Typography>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span>
-                        <img src={Ils} />
-                      </span>
-                      <span>3000</span>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider />
-                  <ListItem>
-                    <ListItemText>
-                      <Typography component="span" variant="subtitle1">
-                        June
-                      </Typography>
-                      <Typography
-                        component="span"
-                        variant="overline"
-                        className={classes.yearText}
-                      >
-                        2020
-                      </Typography>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span>
-                        <img src={Ils} />
-                      </span>
-                      <span>3000</span>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider />
-                  <ListItem>
-                    <ListItemText>
-                      <Typography component="span" variant="subtitle1">
-                        June
-                      </Typography>
-                      <Typography
-                        component="span"
-                        variant="overline"
-                        className={classes.yearText}
-                      >
-                        2020
-                      </Typography>
-                    </ListItemText>
-                    <ListItemSecondaryAction>
-                      <span>
-                        <img src={Ils} />
-                      </span>
-                      <span>3000</span>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider />
-                </List>
+                <List>{BuildBillHistory(historyBill)}</List>
               </Paper>
             </Box>
           </Grid>

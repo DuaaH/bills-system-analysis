@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import LandingPage from './LandingPage';
+import Signup from './Signup';
 
 export default () => (
   <Router>
@@ -14,6 +15,7 @@ export default () => (
         <Grid item container xs={12} md={6}>
           <Switch>
             <Route exact path="/" component={LandingPage} />
+            <Route exact path="/signup" component={Signup} />
           </Switch>
         </Grid>
         <Grid item xs={false} md={3} />

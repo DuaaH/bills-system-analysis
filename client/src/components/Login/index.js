@@ -64,7 +64,7 @@ function Login(props) {
                   margin={'dense'}
                   InputProps={{
                     className: classes.input,
-                    root: classes.root,
+                    disableUnderline: true,
                   }}
                   fullWidth
                 />
@@ -81,7 +81,7 @@ function Login(props) {
                   margin={'dense'}
                   InputProps={{
                     className: classes.input,
-                    root: classes.root,
+                    disableUnderline: true,
                   }}
                   fullWidth
                 />

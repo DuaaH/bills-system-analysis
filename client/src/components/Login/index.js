@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Grid, Box, Typography, TextField, Button } from '@material-ui/core';
+import {
+  Grid,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  FormHelperText,
+} from '@material-ui/core';
 import Style from './style';
 
 function Login(props) {
@@ -52,6 +60,12 @@ function Login(props) {
                   label="Email"
                   type="text"
                   className={classes.inputBox}
+                  autoFocus={true}
+                  margin={'dense'}
+                  InputProps={{
+                    className: classes.input,
+                    root: classes.root,
+                  }}
                   fullWidth
                 />
               </Grid>
@@ -64,13 +78,26 @@ function Login(props) {
                   label="Password"
                   type="password"
                   className={classes.inputBox}
+                  margin={'dense'}
+                  InputProps={{
+                    className: classes.input,
+                    root: classes.root,
+                  }}
                   fullWidth
                 />
               </Grid>
             </Grid>
-            <Typography className={classes.errorMessage}>
-              {message.charAt(0).toUpperCase() + message.slice(1)}
-            </Typography>
+            <Grid item>
+              <FormControl>
+                <FormHelperText
+                  id="error-text"
+                  className={classes.errorMessage}
+                >
+                  {message.charAt(0).toUpperCase() + message.slice(1)}
+                </FormHelperText>
+              </FormControl>
+            </Grid>
+
             <Button className={classes.loginBtn} type="submit" fullWidth>
               Sign in
             </Button>

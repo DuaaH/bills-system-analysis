@@ -1,6 +1,6 @@
 import React from 'react';
 import { Backdrop, CircularProgress } from '@material-ui/core';
-import Style from './Style';
+import Style from './style';
 
 export default ({ isLoading }) => {
   const classes = Style();

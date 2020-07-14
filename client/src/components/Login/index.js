@@ -9,6 +9,7 @@ import {
   FormControl,
   FormHelperText,
 } from '@material-ui/core';
+import XRegExp from 'xregexp';
 import Style from './style';
 
 function Login(props) {
@@ -18,9 +19,22 @@ function Login(props) {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
 
+  const validateEmail = () => {
+    const re = new XRegExp(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    );
+    return re.test(String(email).toLowerCase());
+  };
+
   const handleForm = (e) => {
     e.preventDefault();
     const data = { email, password };
+    if (!email || !validateEmail(email)) {
+      return setMessage('You must Enter your email first!');
+    }
+    if (!password) {
+      return setMessage('You must enter passowrd!');
+    }
 
     axios
       .post('/api/login', data)

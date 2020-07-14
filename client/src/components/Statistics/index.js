@@ -18,18 +18,21 @@ import LoaderProgress from '../../common-components/LoaderProgress';
 import Ils from '../../assets/ils.svg';
 import Styles from './style';
 
-// const data = {
-//   labels: ['ME', 'Person1', 'Person2', 'Person3', 'Person4', 'Person5'],
-//   datasets: [
-//     {
-//       label: 'Consumption',
-//       data: [200, 400, 600, 800, 1000, 1500],
-//       backgroundColor: Object.values(teal),
-//       borderColor: '#fff',
-//       borderWidth: 1,
-//     },
-//   ],
-// };
+const data = {
+  labels: [],
+  datasets: [
+    {
+      label: 'Consumption',
+      data: '',
+      backgroundColor: Object.values(teal).splice(
+        2,
+        Object.values(teal).length,
+      ),
+      borderColor: '#fff',
+      borderWidth: 1,
+    },
+  ],
+};
 
 export default (props) => {
   const classes = Styles();
@@ -40,7 +43,7 @@ export default (props) => {
   const [displayBlock, setIsDisplayBlock] = useState(true);
 
   const getBillHistory = () =>
-    axios.get(`/api/bill/${props.match.params.bill_type}`);
+    axios.get(`/api/bill/getBillByType/${props.match.params.bill_type}`);
 
   const getBillStatistics = () =>
     axios.get(
@@ -52,15 +55,14 @@ export default (props) => {
       .then((results) => {
         const history = results[0];
         const statistics = results[1];
+
         setHistoryBill(history.data.Result);
 
-        const chart = statistics.data.Result;
-        chart.datasets[0].backgroundColor = Object.values(teal).splice(
-          2,
-          Object.values(teal).length,
-        );
+        const { amount, amountLabels } = statistics.data.Result;
 
-        setChartData(chart);
+        data.datasets[0].data = amount;
+        data.labels = amountLabels;
+        setChartData(data);
 
         if (!history.data.Result) {
           setIsLoading(false);

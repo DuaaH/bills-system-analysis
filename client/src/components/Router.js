@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import LandingPage from './LandingPage';
 import Home from './Home';
-import Bill from './Bills'
+import Bill from './Bills';
 
 export default () => (
   <Router>
@@ -17,8 +17,7 @@ export default () => (
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/home" component={Home} />
-            <Route exact path="/bill" component={Bill} />
-
+            <Route exact path="/bill/:bill_type" component={Bill} />
           </Switch>
         </Grid>
         <Grid item xs={false} md={3} />

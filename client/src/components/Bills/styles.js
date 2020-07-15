@@ -21,4 +21,7 @@ export default makeStyles((theme) => ({
   statisticsLink: {
     marginBottom: theme.spacing(0.5),
   },
+  dividerStyle: {
+    backgroundColor: '#F2F2F2',
+  },
 }));

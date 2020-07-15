@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Paper,
   Tabs,
@@ -12,6 +12,11 @@ import {
   AccordionDetails,
   TextField,
   InputAdornment,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  Divider,
+  List,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LoaderProgress from '../../common-components/LoaderProgress';
@@ -20,6 +25,8 @@ import SwipeableViews from 'react-swipeable-views';
 import { useTheme as theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,11 +55,13 @@ function a11yProps(index) {
   };
 }
 
-export default () => {
+export default (props) => {
   const classes = Style();
   const [value, setValue] = React.useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [displayBlock, setIsDisplayBlock] = useState(false);
+  const [lastBill, setLastBill] = useState([]);
+  const [providerInfo, setProviderInfo] = useState({});
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -62,6 +71,118 @@ export default () => {
     setValue(index);
   };
 
+  useEffect(() => {
+    axios
+      .get(`/api/bill/${props.match.params.bill_type}`)
+      .then((result) => {
+        setLastBill(result.data.Result);
+        if (result.data.Result && result.data.Result.length > 0) {
+          const providerId = result.data.Result[0].provider_id;
+          axios
+            .get(`/api/providers/getProviderById/${providerId}`)
+            .then((resultData) => {
+              setProviderInfo(resultData.data.Result[0]);
+              console.log(resultData.data.Result);
+            })
+            .catch((err) => {
+              if (err.response.data) {
+                swal('Error', err.response.data.message, 'error');
+              }
+              setIsLoading(false);
+              setIsDisplayBlock(true);
+            });
+        }
+        if (!result.data.Result) {
+          setIsLoading(false);
+          setIsDisplayBlock(true);
+        }
+      })
+      .catch((err) => {
+        if (err.response.data) {
+          swal('Error', err.response.data.message, 'error');
+        }
+        setIsLoading(false);
+        setIsDisplayBlock(true);
+      });
+  }, []);
+  const buildBillBanel = (lastBill) => {
+    if (!lastBill) {
+      return [];
+    }
+    if (lastBill.length === 0) {
+      return [];
+    }
+    return lastBill.map((bill, index) => {
+      if (lastBill.length - 1 === index && isLoading) {
+        setIsLoading(false);
+      }
+      const billDate = new Date(bill.bill_date);
+      const dueDate = new Date(bill.due_date);
+      return (
+        <Accordion defaultExpanded>
+          <AccordionSummary
+            className={classes.accordionBackground}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className={classes.heading}>
+              Bill {index + 1}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails className={classes.conentFont}>
+            <Grid tiem container xs={12} alignItems="flex-end">
+              <TextField
+                className={classes.textFieldStyle}
+                disabled
+                label="Number"
+                id="standard-start-adornment"
+                value={bill.bill_number}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">#</InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                className={classes.textFieldStyle}
+                disabled
+                label="Amount"
+                id="standard-start-adornment"
+                value={bill.total_amount}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">₪</InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                className={classes.textFieldStyle}
+                disabled
+                label="Date"
+                id="standard-start-adornment"
+                value={billDate.toLocaleDateString()}
+              />
+              <TextField
+                className={classes.textFieldStyle}
+                disabled
+                label="Due Date"
+                id="standard-start-adornment"
+                value={dueDate.toLocaleDateString()}
+              />
+              <Box component="span" className={classes.statisticsLink}>
+                <Link
+                  to={`/bill/${props.match.params.bill_type}/statistics/${bill.gid}`}
+                >
+                  Statistics
+                </Link>
+              </Box>
+            </Grid>
+          </AccordionDetails>
+        </Accordion>
+      );
+    });
+  };
   const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
 
   return (
@@ -83,12 +204,12 @@ export default () => {
             direction="column"
             alignItems="center"
           >
-            <AppBar position="static" color="default">
+            <AppBar position="static" color="primary">
               <Tabs
                 value={value}
                 onChange={handleChange}
                 indicatorColor="secondary"
-                textColor="secondary"
+                textColor="inherit"
                 variant="fullWidth"
                 aria-label="full width tabs example"
               >
@@ -103,209 +224,131 @@ export default () => {
                 onChangeIndex={handleChangeIndex}
               >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                  <Accordion defaultExpanded>
-                    <AccordionSummary
-                      className={classes.accordionBackground}
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography className={classes.heading}>
-                        Bill 1
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails className={classes.conentFont}>
-                      <Grid tiem container xs={12} alignItems="flex-end">
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Number"
-                          id="standard-start-adornment"
-                          value="254"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                #
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Amount"
-                          id="standard-start-adornment"
-                          value="349"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                ₪
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Date"
-                          id="standard-start-adornment"
-                          value="20/12/2020"
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Due Date"
-                          id="standard-start-adornment"
-                          value="20/10/2020"
-                        />
-                        <Box
-                          component="span"
-                          className={classes.statisticsLink}
-                        >
-                          <Link to="/bill/electricity/statistics/129e4e27-89a0-415e-903a-b7090f9c06f9">
-                            Statistics
-                          </Link>
-                        </Box>
-                      </Grid>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      className={classes.accordionBackground}
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography className={classes.heading}>
-                        Bill 2
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails className={classes.conentFont}>
-                      <Grid>
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Number"
-                          id="standard-start-adornment"
-                          value="254"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                #
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Amount"
-                          id="standard-start-adornment"
-                          value="349"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                ₪
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Date"
-                          id="standard-start-adornment"
-                          value="20/12/2020"
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Due Date"
-                          id="standard-start-adornment"
-                          value="20/10/2020"
-                        />
-                        <Box
-                          component="span"
-                          className={classes.statisticsLink}
-                        >
-                          <Link to="/bill/electricity/statistics/129e4e27-89a0-415e-903a-b7090f9c06f9">
-                            Statistics
-                          </Link>
-                        </Box>
-                      </Grid>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      className={classes.accordionBackground}
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography className={classes.heading}>
-                        Bill 3
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails className={classes.conentFont}>
-                      <Grid>
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Number"
-                          id="standard-start-adornment"
-                          value="254"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                #
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Amount"
-                          id="standard-start-adornment"
-                          value="349"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                ₪
-                              </InputAdornment>
-                            ),
-                          }}
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Date"
-                          id="standard-start-adornment"
-                          value="20/12/2020"
-                        />
-                        <TextField
-                          className={classes.textFieldStyle}
-                          disabled
-                          label="Due Date"
-                          id="standard-start-adornment"
-                          value="20/10/2020"
-                        />
-                        <Box
-                          component="span"
-                          className={classes.statisticsLink}
-                        >
-                          <Link to="/bill/electricity/statistics/129e4e27-89a0-415e-903a-b7090f9c06f9">
-                            Statistics
-                          </Link>
-                        </Box>
-                      </Grid>
-                    </AccordionDetails>
-                  </Accordion>
+                  {buildBillBanel(lastBill)}
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                  <Typography variant="h4">
-                    povider contact information
-                  </Typography>
+                  <List>
+                    <ListItem>
+                      <ListItemText>
+                        <Typography component="span" variant="subtitle1">
+                          Name
+                        </Typography>
+                      </ListItemText>
+                      <ListItemSecondaryAction>
+                        <Typography
+                          component="span"
+                          variant="overline"
+                          className={classes.yearText}
+                        >
+                          {providerInfo.name}
+                        </Typography>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider className={classes.dividerStyle} />
+
+                    <ListItem>
+                      <ListItemText>
+                        <Typography component="span" variant="subtitle1">
+                          Email
+                        </Typography>
+                      </ListItemText>
+                      <ListItemSecondaryAction>
+                        <Typography
+                          component="span"
+                          variant="overline"
+                          className={classes.yearText}
+                        >
+                          {providerInfo.email}
+                        </Typography>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider className={classes.dividerStyle} />
+                    <ListItem>
+                      <ListItemText>
+                        <Typography component="span" variant="subtitle1">
+                          Address
+                        </Typography>
+                      </ListItemText>
+                      <ListItemSecondaryAction>
+                        <Typography
+                          component="span"
+                          variant="overline"
+                          className={classes.yearText}
+                        >
+                          {providerInfo.address}
+                        </Typography>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider className={classes.dividerStyle} />
+                    <ListItem>
+                      <ListItemText>
+                        <Typography component="span" variant="subtitle1">
+                          PO BOX
+                        </Typography>
+                      </ListItemText>
+                      <ListItemSecondaryAction>
+                        <Typography
+                          component="span"
+                          variant="overline"
+                          className={classes.yearText}
+                        >
+                          {providerInfo.po_box}
+                        </Typography>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider className={classes.dividerStyle} />
+                    <ListItem>
+                      <ListItemText>
+                        <Typography component="span" variant="subtitle1">
+                          Phone 1
+                        </Typography>
+                      </ListItemText>
+                      <ListItemSecondaryAction>
+                        <Typography
+                          component="span"
+                          variant="overline"
+                          className={classes.yearText}
+                        >
+                          {providerInfo.phone1}
+                        </Typography>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider className={classes.dividerStyle} />
+                    <ListItem>
+                      <ListItemText>
+                        <Typography component="span" variant="subtitle1">
+                          Phone 2
+                        </Typography>
+                      </ListItemText>
+                      <ListItemSecondaryAction>
+                        <Typography
+                          component="span"
+                          variant="overline"
+                          className={classes.yearText}
+                        >
+                          {providerInfo.phone2}
+                        </Typography>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider className={classes.dividerStyle} />
+                    <ListItem>
+                      <ListItemText>
+                        <Typography component="span" variant="subtitle1">
+                          Phone 3
+                        </Typography>
+                      </ListItemText>
+                      <ListItemSecondaryAction>
+                        <Typography
+                          component="span"
+                          variant="overline"
+                          className={classes.yearText}
+                        >
+                          {providerInfo.phone3}
+                        </Typography>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider className={classes.dividerStyle} />
+                  </List>
                 </TabPanel>
               </SwipeableViews>
             </Box>

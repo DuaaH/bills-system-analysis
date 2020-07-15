@@ -4,6 +4,7 @@ import { Grid } from '@material-ui/core';
 import LandingPage from './LandingPage';
 import Login from './Login';
 import Home from './Home';
+import NewBill from './NewBill';
 
 export default () => (
   <Router>
@@ -18,6 +19,7 @@ export default () => (
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/new-bill" component={NewBill} />
           </Switch>
         </Grid>
         <Grid item xs={false} md={3} />

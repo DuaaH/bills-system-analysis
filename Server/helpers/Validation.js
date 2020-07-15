@@ -38,10 +38,10 @@ const validatesignupInfo = (userData) => {
       .email(),
     userName: joi
       .string()
-      .min(5)
+      .min(3)
       .max(30)
       .required()
-      .pattern(new RegExp('^[a-zA-Z0-9_]')),
+      .pattern(new RegExp('^[a-zA-Z_]')),
     password: joi
       .string()
       .min(8)

@@ -21,6 +21,3 @@ module.exports = (userId, bill, user) => {
 
   return connection.query(sql.text, sql.values);
 };
-
-// town: 'Dura',
-// [0]   city: 'Hebron'

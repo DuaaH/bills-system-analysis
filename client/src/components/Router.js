@@ -4,7 +4,11 @@ import { Grid } from '@material-ui/core';
 import LandingPage from './LandingPage';
 import Login from './Login';
 import Home from './Home';
+<<<<<<< HEAD
 import NewBill from './NewBill';
+=======
+import Statistics from './Statistics';
+>>>>>>> 6329147d9fadfa16b9983f5a751be93512940049
 
 export default () => (
   <Router>
@@ -20,6 +24,18 @@ export default () => (
             <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/new-bill" component={NewBill} />
+
+            <Route
+              exact
+              path="/bill/:bill_type/statistics/:billId"
+              component={(props) => (
+                <Statistics
+                  title="Electricity Bill"
+                  providerName="Hebron electric power"
+                  {...props}
+                />
+              )}
+            />
           </Switch>
         </Grid>
         <Grid item xs={false} md={3} />

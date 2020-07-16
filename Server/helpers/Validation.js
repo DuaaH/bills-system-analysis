@@ -29,4 +29,18 @@ const validateLoginInfo = (userData) => {
   return schema.validate(userData);
 };
 
-module.exports = { validateEmail, validateLoginInfo };
+const newBillValidation = (billData) => {
+  const schema = joi.object({
+    providerId: joi.number().required(),
+    type: joi.string().required(),
+    totalAmount: joi.number().required(),
+    billDate: joi.date().required(),
+    dueDate: joi.date().required(),
+    startDate: joi.date().required(),
+    endDate: joi.date().required(),
+    billNumber: joi.number().required(),
+  });
+  return schema.validate(billData);
+};
+
+module.exports = { validateEmail, validateLoginInfo, newBillValidation };

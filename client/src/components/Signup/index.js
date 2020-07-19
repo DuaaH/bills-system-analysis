@@ -21,6 +21,58 @@ function Login(props) {
   const [rePassword, setRePassword] = useState('');
   const [message, setMessage] = useState('');
 
+  const validateEmail = () => {
+    const re = new XRegExp(
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    );
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validateUserName = () => {
+    const re = new XRegExp(/^[A-Za-z_ ]{3,30}$/);
+    return re.test(String(userName).toLowerCase());
+  };
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    const data = { email, userName, password, rePassword };
+
+    if (!email) {
+      return setMessage('You must Enter your email first!');
+    }
+    if (!validateEmail(email)) {
+      return setMessage('Make sure that you type your Email in a correct way!');
+    }
+    if (!userName) {
+      return setMessage("User name shouldn't be an empty. Enter it please.");
+    }
+    if (!validateUserName(userName)) {
+      return setMessage(
+        'User Name must contains only capital or small letters or underscore(_) or space',
+      );
+    }
+    if (!password) {
+      return setMessage('You must enter passowrd!');
+    }
+    if (!rePassword) {
+      return setMessage('You must fill Re-password field!');
+    }
+
+    axios
+      .post('/api/signup', data)
+      .then((result) => {
+        console.log(result);
+        if (result.status === 200) {
+          props.history.push({
+            pathname: '/home',
+          });
+        }
+      })
+      .catch((err) => {
+        setMessage(err.response.data.message);
+      });
+  };
+
   return (
     <Box component="div" p={0} width={1}>
       <Grid container item sx={12} justify="center">
@@ -60,7 +112,7 @@ function Login(props) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  onChange={({ target }) => setPassword(target.value)}
+                  onChange={({ target }) => setUserName(target.value)}
                   id="userName"
                   name="username"
                   value={userName}
@@ -94,7 +146,7 @@ function Login(props) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  onChange={({ target }) => setPassword(target.value)}
+                  onChange={({ target }) => setRePassword(target.value)}
                   id="rePassword"
                   name="rePassword"
                   value={rePassword}

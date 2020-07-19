@@ -20,7 +20,7 @@ import {
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LoaderProgress from '../../common-components/LoaderProgress';
-import Style from './styles';
+import Style from './style';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme as theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -73,7 +73,7 @@ export default (props) => {
 
   useEffect(() => {
     axios
-      .get(`/api/bill/${props.match.params.bill_type}`)
+      .get(`/api/bill/getBillByType/${props.match.params.bill_type}`)
       .then((result) => {
         setLastBill(result.data.Result);
         if (result.data.Result && result.data.Result.length > 0) {

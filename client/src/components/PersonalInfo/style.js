@@ -2,14 +2,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
   image: {
-    margin: theme.spacing(5),
+    margin: theme.spacing(4),
     width: '100px',
     height: '100px',
   },
   Button: {
     backgroundColor: theme.palette.secondary.main,
     marginLeft: '130px',
-    marginTop: theme.spacing(5),
+    marginTop: theme.spacing(3),
   },
   updateButt: {
     width: '100%',
@@ -18,9 +18,13 @@ export default makeStyles((theme) => ({
     textAlign: 'right',
   },
   root: {
-    paddingTop: '25px',
+    paddingTop: '10px',
   },
-  // text: {
-  //   textAlign: ' right',
-  // },
+  LineHorizantal: {
+    width: '100%',
+  },
+  root:{
+    underline:'None',
+  }
+  
 }));

@@ -23,8 +23,7 @@ export default makeStyles((theme) => ({
   LineHorizantal: {
     width: '100%',
   },
-  root:{
-    underline:'None',
-  }
+    
+  
   
 }));

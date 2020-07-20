@@ -41,7 +41,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Typography component="div">{children}</Typography>
         </Box>
       )}
     </div>
@@ -119,19 +119,19 @@ export default (props) => {
       const billDate = new Date(bill.bill_date);
       const dueDate = new Date(bill.due_date);
       return (
-        <Accordion defaultExpanded>
+        <Accordion defaultExpanded key={index}>
           <AccordionSummary
             className={classes.accordionBackground}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className={classes.heading}>
+            <Typography className={classes.heading} component="span">
               Bill {index + 1}
             </Typography>
           </AccordionSummary>
           <AccordionDetails className={classes.conentFont}>
-            <Grid tiem container xs={12} alignItems="flex-end">
+            <Grid item container alignItems="flex-end">
               <TextField
                 className={classes.textFieldStyle}
                 disabled

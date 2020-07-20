@@ -12,7 +12,7 @@ import {
 import XRegExp from 'xregexp';
 import Style from './style';
 
-function Login(props) {
+function SignUp(props) {
   const classes = Style();
 
   const [email, setEmail] = useState('');
@@ -182,4 +182,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default SignUp;

@@ -61,7 +61,6 @@ function Login(props) {
     axios
       .post('/api/signup', data)
       .then((result) => {
-        console.log(result);
         if (result.status === 200) {
           props.history.push({
             pathname: '/home',

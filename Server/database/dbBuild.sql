@@ -39,14 +39,14 @@ CREATE TABLE users
     --gid uuid NOT NULL DEFAULT uuid_generate_v4 (),
     display_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    phone VARCHAR(30),
-    personal_status VARCHAR(100),
-    number_of_Individuals INTEGER,
-    address_id INTEGER,
+    phone VARCHAR(30) DEFAULT '0',
+    personal_status VARCHAR(100) DEFAULT 'single' ,
+    number_of_Individuals INTEGER DEFAULT 0,
+    address_id INTEGER DEFAULT 1,
     FOREIGN KEY (address_id) REFERENCES address (id),
-    number_of_devices INTEGER,
+    number_of_devices INTEGER DEFAULT 0,
     password TEXT NOT NULL,
-    email_active boolean,
+    email_active boolean DEFAULT true,
     reset_password_code VARCHAR(100)
 );
 

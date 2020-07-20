@@ -38,7 +38,12 @@ module.exports = (req, res) => {
       if (result1.rows[0] !== undefined) {
         return res
           .status(400)
-          .json(failedMessage('This email is found, use another one'));
+          .json(
+            failedMessage(
+              null,
+              'This email has an account. Please register using another one.',
+            ),
+          );
       }
 
       const gid = uuidv4();

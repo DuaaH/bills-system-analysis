@@ -8,27 +8,18 @@ import {
   NativeSelect,
   InputLabel,
   FormControl,
-  TextField,
   Button,
 } from '@material-ui/core';
-
 import LoaderProgress from '../../common-components/LoaderProgress';
 import Styles from './style';
 import Group from '../../assets/Group.svg';
 import NumericInput from 'react-numeric-input';
-import shadows from '@material-ui/core/styles/shadows';
 
 const PersonalInfo = () => {
   const [information, setInformation] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  // const [townName, settownName] = useState('');
-  // const [cityName, setcityName] = useState('');
-  // const [userStatus, setuserStatus] = useState('');
-  // const [userNumber, setuserNumber] = useState('0');
-  // const [deviceNumber, setdeviceNumber] = useState('0');
-  // const [click, setClick] = useState(false);
-  // console.log(JSON.stringify(information.display_name));
-  // console.log(JSON.stringify(information));
+  
+  const classes = Styles();
   const [userInfo, setuserInfo] = useState({
     cityName: {
       value: '',
@@ -91,47 +82,45 @@ const PersonalInfo = () => {
   const names = ['Halhul', 'Dura'];
   const city = ['Hebron', 'Bethlehem'];
   const status = ['None', 'single', 'Married'];
-  // const handleChange = (event) => {
-  //   setClick(true);
 
-  //   settownName(event.target.value);
-  // };
-  // const handleCityChange = (event) => {
-  //   setClick(true);
-  //   setcityName(event.target.value);
-  // };
-  // const handleStatusChange = (event) => {
-  //   setClick(true);
-  //   setuserStatus(event.target.value);
-  // };
-  // const handleNumChange = (event) => {
-  //   setClick(true);
-  //   setuserNumber(event.target.value);
-  // };
-  // const handleDeviceChange = (event) => {
-  //   setClick(true);
-  //   setuserInfo(event.target.value);
-  // };
+  const handleUserChange = (event) => {
+    let form = { ...userInfo };
+    form[event.target.name].value = event.target.value;
+    setuserInfo(form);
+  };
 
-  // const handleUserChange = (event) => {
-  //   setuserInfo(event.target.value);
-  // };
+  const handleIndivisulaChange = (event) => {
+    let form = { ...userInfo };
+    form['numberOfindivisuals'].value = event;
+    setuserInfo(form);
+  };
+  const handleDeviceChange = (event) => {
+    let form = { ...userInfo };
+    form['numberOfDevices'].value = event;
+    setuserInfo(form);
+  };
+
+  
   useEffect(() => {
     axios
       .get('/api/profile')
       .then((res) => {
-        console.log(res, 'hhhhhhhhhh');
         setInformation(res.data.Result);
-
         setIsLoading(false);
-        // setClick(true);
       })
       .catch((err) => {
-        // if (err.res.data) {
+        if (err.res.data) {
           console.log(err);
-        // }
+        }
       });
   }, []);
+
+
+
+
+
+
+
 
   useEffect(() => {
     setuserInfo((prevValue) => {
@@ -142,18 +131,18 @@ const PersonalInfo = () => {
           value: information.display_name,
         },
         mobile: { ...prevValue.mobile, value: information.phone },
-        numberOfDevices:{...prevValue.numberOfDevices , value:information.number_of_devices},
-        numberOfindivisuals:{...prevValue.numberOfindivisuals , value:information.number_of_individuals},
-        status:{...prevValue.status , value:information.personal_status}
+        numberOfDevices: {
+          ...prevValue.numberOfDevices,
+          value: information.number_of_devices,
+        },
+        numberOfindivisuals: {
+          ...prevValue.numberOfindivisuals,
+          value: information.number_of_individuals,
+        },
+        status: { ...prevValue.status, value: information.personal_status },
       };
     });
   }, [information]);
-
-  // const town = click ? townName : information.town;
-  // const City = click ? cityName : information.city;
-  // const relation = click ? userStatus : information.personal_status;
-  // const num = click ? information.number_of_individuals : userNumber;
-  // const device = click ? information.number_of_devices : deviceNumber;
 
   return (
     <Box component="div" p={3} width={1}>
@@ -175,9 +164,10 @@ const PersonalInfo = () => {
           </Grid>
           <Grid xs={6} className={classes.gridPosition}>
             <Input
+              name="displayName"
               className={classes.text}
               value={userInfo.displayName.value}
-              // onChange={handleUserChange}
+              onChange={handleUserChange}
               inputProps={{ style: { textAlign: 'right' } }}
               disableUnderline={true}
             />
@@ -191,14 +181,18 @@ const PersonalInfo = () => {
           </Grid>
           <Grid xs={6} className={classes.gridPosition}>
             <Input
+              name="mobile"
               value={userInfo.mobile.value}
               className={classes.text}
               disableUnderline={true}
+              onChange={handleUserChange}
               inputProps={{ style: { textAlign: 'right' } }}
             />
           </Grid>
         </Grid>
         <hr className={classes.LineHorizantal} />
+
+
         <Grid item container xs={12}>
           <Grid xs={6}>
             <InputLabel className={classes.root}> Address </InputLabel>
@@ -208,8 +202,6 @@ const PersonalInfo = () => {
               <InputLabel>Town</InputLabel>
 
               <NativeSelect
-                // value={town}
-                // onChange={handleChange}
                 input={<Input />}
                 inputProps={{ style: { textAlign: 'right' } }}
                 disableUnderline={true}
@@ -225,8 +217,6 @@ const PersonalInfo = () => {
               <InputLabel>city</InputLabel>
 
               <NativeSelect
-                // value={City}
-                // onChange={handleCityChange}
                 input={<Input />}
                 inputProps={{ style: { textAlign: 'right' } }}
                 disableUnderline={true}
@@ -242,6 +232,8 @@ const PersonalInfo = () => {
         </Grid>
         <hr className={classes.LineHorizantal} />
 
+
+
         <Grid item container xs={12}>
           <Grid xs={6}>
             <InputLabel className={classes.root}>
@@ -251,7 +243,7 @@ const PersonalInfo = () => {
           </Grid>
           <Grid xs={6} className={classes.gridPosition}>
             <NumericInput
-          
+              onChange={handleIndivisulaChange}
               min={0}
               max={50}
               value={userInfo.numberOfindivisuals.value}
@@ -276,7 +268,6 @@ const PersonalInfo = () => {
                 },
                 arrowUp: {
                   borderBottomColor: '#00000',
-
                 },
                 arrowDown: {
                   borderTopColor: '#00000',
@@ -293,9 +284,10 @@ const PersonalInfo = () => {
           </Grid>
           <Grid xs={6} className={classes.gridPosition}>
             <NativeSelect
-               value={userInfo.status.value}
+              inputProps={{ name: 'status' }}
+              value={userInfo.status.value}
               input={<Input />}
-              // onChange={handleStatusChange}
+              onChange={handleUserChange}
               disableUnderline={true}
             >
               {status.map((personStatus) => (
@@ -317,10 +309,10 @@ const PersonalInfo = () => {
           </Grid>
           <Grid xs={6} className={classes.gridPosition}>
             <NumericInput
-            value={userInfo.numberOfDevices.value}
+              value={userInfo.numberOfDevices.value}
               min={0}
               max={50}
-            //  onChange={ handleDeviceChange}
+              onChange={handleDeviceChange}
               className={classes.inputNum}
               size="1"
               style={{
@@ -336,7 +328,6 @@ const PersonalInfo = () => {
                   textAlign: 'right',
                 },
                 arrowUp: {
-          
                   borderBottomColor: '#000000',
                 },
                 arrowDown: {

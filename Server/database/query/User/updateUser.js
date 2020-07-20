@@ -1,6 +1,5 @@
 const connection = require('../../connection');
 const updateInfo = (id, userinfo) => {
-  console.log(id)
   return connection.query(
    
     'UPDATE users SET display_name =$2,phone=$3 ,personal_status =$4,number_of_individuals =$5 ,number_of_devices =$6,address_id =$7 WHERE id=$1',

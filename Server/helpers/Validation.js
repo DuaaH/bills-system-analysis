@@ -43,4 +43,28 @@ const newBillValidation = (billData) => {
   return schema.validate(billData);
 };
 
-module.exports = { validateEmail, validateLoginInfo, newBillValidation };
+
+const validatesignupInfo = (userData) => {
+  const schema = joi.object({
+    email: joi
+      .string()
+      .min(6)
+      .required()
+      .email(),
+    userName: joi
+      .string()
+      .min(3)
+      .max(30)
+      .required()
+      .pattern(new RegExp('^[a-zA-Z_]')),
+    password: joi
+      .string()
+      .min(8)
+      .required()
+      .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    rePassword: joi.ref('password'),
+  });
+  return schema.validate(userData);
+};
+
+module.exports = { validateEmail, validateLoginInfo, validatesignupInfo, newBillValidation };

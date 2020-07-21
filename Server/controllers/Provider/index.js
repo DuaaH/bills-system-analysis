@@ -1,3 +1,7 @@
 const getProviderByType = require('./getProviderByType');
+const getProviderById = require('./getProviderById');
 
-module.exports = { getProviderByType };
+module.exports = {
+  getProviderByType,
+  getProviderById,
+};

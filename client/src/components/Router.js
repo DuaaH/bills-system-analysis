@@ -7,6 +7,7 @@ import Login from './Login';
 import Home from './Home';
 import Bill from './Bills';
 import Statistics from './Statistics';
+import Error404 from './Errors/Error404';
 
 export default () => (
   <Router>
@@ -35,6 +36,7 @@ export default () => (
                 />
               )}
             />
+            <Route component={Error404} />
           </Switch>
         </Grid>
         <Grid item xs={false} md={3} />

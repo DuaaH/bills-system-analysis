@@ -217,10 +217,10 @@ export default () => {
       providerId: billData.provider.value,
       type: billData.billType.value,
       totalAmount: billData.totalAmount.value,
-      billDate: fields.billDate.value,
-      dueDate: fields.dueDate.value,
-      startDate: fields.fromDate.value,
-      endDate: fields.toDate.value,
+      billDate: fields.billDate,
+      dueDate: fields.dueDate,
+      startDate: fields.fromDate,
+      endDate: fields.toDate,
       billNumber: billData.billNumber.value,
     };
 

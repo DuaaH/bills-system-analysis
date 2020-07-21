@@ -14,7 +14,7 @@ router.get(
   authentication,
   getBillStatistics,
 );
-router.get('/api/bill/getBillByType/:bill_type', getLastBill);
+router.get('/api/bill/getBillByType/:bill_type', authentication, getLastBill);
 router.post('/api/login', logIn);
 router.get('/api/home', authentication, getUserBillType);
 
@@ -26,7 +26,7 @@ router.get('/api/address', getAllAddresses);
 router.post('/api/signup', signUp);
 router.get(
   '/api/providers/getProviderById/:provider_id',
-  authentication, 
+  authentication,
   getProviderById,
 );
 module.exports = router;

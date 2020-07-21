@@ -10,7 +10,7 @@ if (!connectionString) {
 
 const options = {
   connectionString,
-  ssl: false,
+  ssl: !connectionString.includes('localhost'),
 };
 
 module.exports = new Pool(options);

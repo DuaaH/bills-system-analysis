@@ -189,7 +189,7 @@ export default (props) => {
     <Box component="div" p={3} width={1}>
       <LoaderProgress isLoading={isLoading} />
       <Box component="div" display={displayStatus} width={1}>
-        <Grid container item sx={12} justify="center">
+        <Grid container item xs={12} justify="center">
           <Grid item container xs={12}>
             <Typography variant="h4" color="textPrimary" align="left">
               Electricity bill

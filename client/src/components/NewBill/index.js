@@ -103,6 +103,14 @@ export default () => {
   const [providerType, setProviderType] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [displayBlock, setIsDisplayBlock] = useState(true);
+  const [fields, setFields] = useState({});
+
+  const handleDateChange = (dateName, dateValue) => {
+    setFields({
+      ...fields,
+      [dateName]: dateValue,
+    });
+  };
 
   useEffect(() => {
     const min = new Date();
@@ -209,10 +217,10 @@ export default () => {
       providerId: billData.provider.value,
       type: billData.billType.value,
       totalAmount: billData.totalAmount.value,
-      billDate: billData.billDate.value,
-      dueDate: billData.dueDate.value,
-      startDate: billData.fromDate.value,
-      endDate: billData.toDate.value,
+      billDate: fields.billDate.value,
+      dueDate: fields.dueDate.value,
+      startDate: fields.fromDate.value,
+      endDate: fields.toDate.value,
       billNumber: billData.billNumber.value,
     };
 
@@ -388,8 +396,10 @@ export default () => {
                         name="billDate"
                         label={billData.billDate.lable}
                         format="MM/dd/yyyy"
-                        value={billData.billDate.value}
-                        onChange={handleTextInput}
+                        value={fields['billDate']}
+                        onChange={(value) =>
+                          handleDateChange('billDate', value)
+                        }
                         minDate={minDate}
                         maxDate={maxDate}
                         className={classes.datePicker}
@@ -407,8 +417,8 @@ export default () => {
                         id="dueDate"
                         name="dueDate"
                         format="MM/dd/yyyy"
-                        value={billData.dueDate.value}
-                        onChange={handleTextInput}
+                        value={fields['dueDate']}
+                        onChange={(value) => handleDateChange('dueDate', value)}
                         minDate={minDate}
                         maxDate={maxDate}
                         KeyboardButtonProps={{
@@ -427,8 +437,10 @@ export default () => {
                         name="fromDate"
                         label={billData.fromDate.lable}
                         format="MM/dd/yyyy"
-                        value={billData.fromDate.value}
-                        onChange={handleTextInput}
+                        value={fields['fromDate']}
+                        onChange={(value) =>
+                          handleDateChange('fromDate', value)
+                        }
                         minDate={minDate}
                         maxDate={maxDate}
                         KeyboardButtonProps={{
@@ -446,10 +458,10 @@ export default () => {
                         format="MM/dd/yyyy"
                         label={billData.toDate.lable}
                         style={{ color: '#000' }}
-                        value={billData.toDate.value}
+                        value={fields['toDate']}
+                        onChange={(value) => handleDateChange('toDate', value)}
                         minDate={minDate}
                         maxDate={maxDate}
-                        onChange={handleTextInput}
                         KeyboardButtonProps={{
                           'aria-label': 'change date',
                         }}

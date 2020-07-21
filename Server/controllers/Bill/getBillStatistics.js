@@ -13,7 +13,7 @@ const { getPersonalInfo } = require('../../database/query/User');
 
 module.exports = async (req, res) => {
   const { billId } = req.params;
-  const user_id = 1;
+  const user_id = req.user.id;
 
   try {
     // get user data  and bill info

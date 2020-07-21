@@ -38,15 +38,15 @@ CREATE TABLE users
     gid uuid DEFAULT uuid_generate_v4 (),
     --gid uuid NOT NULL DEFAULT uuid_generate_v4 (),
     display_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    phone VARCHAR(30) NOT NULL,
-    personal_status VARCHAR(100) NOT NULL,
-    number_of_Individuals INTEGER NOT NULL,
-    address_id INTEGER NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    phone VARCHAR(30) DEFAULT '0',
+    personal_status VARCHAR(100) DEFAULT 'single' ,
+    number_of_Individuals INTEGER DEFAULT 0,
+    address_id INTEGER DEFAULT 1,
     FOREIGN KEY (address_id) REFERENCES address (id),
-    number_of_devices INTEGER NOT NULL,
+    number_of_devices INTEGER DEFAULT 0,
     password TEXT NOT NULL,
-    email_active boolean,
+    email_active boolean DEFAULT true,
     reset_password_code VARCHAR(100)
 );
 

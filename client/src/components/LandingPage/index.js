@@ -1,14 +1,6 @@
 import React from 'react';
 import Style from './Style';
-import {
-  Grid,
-  Box,
-  Typography,
-  Paper,
-  makeStyles,
-  Button,
-  Link,
-} from '@material-ui/core';
+import { Grid, Box, Typography, Button, Link } from '@material-ui/core';
 
 export default () => {
   const classes = Style();
@@ -28,8 +20,8 @@ export default () => {
             color="textPrimary"
             className={classes.typographyStyle}
           >
-            Billbase Do you want to know if you’re spending too much? Have a
-            clear ii of your bills and compare it with other users
+            Do you want to know if you’re spending too much? Have a clear
+            overview of your bills and compare them with other users.
           </Typography>
 
           <Grid container className={classes.Buttons}>
@@ -57,10 +49,15 @@ export default () => {
           </Grid>
           <Typography variant="body2" color="textSecondary" align="center">
             Have an account?
-            <Link color="inherit" href="/login">
-              Log in
-            </Link>
           </Typography>
+          <Link
+            color="inherit"
+            href="/login"
+            className={classes.linkStyel}
+            underline="always"
+          >
+            Log in
+          </Link>
         </Grid>
       </Grid>
     </Box>

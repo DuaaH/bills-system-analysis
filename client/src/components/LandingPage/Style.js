@@ -8,17 +8,25 @@ export default makeStyles((theme) => ({
     flexDirection: 'column ',
   },
   button: {
-    margin: theme.spacing(3),
-    width: '80%',
-    ml: theme.spacing(6),
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
   },
   header: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(15),
     marginBottom: theme.spacing(6),
-    marginLeft: theme.spacing(2),
   },
   typographyStyle: {
-    marginLeft: theme.spacing(2),
+    marginTop: theme.spacing(6),
     marginBottom: theme.spacing(6),
+    marginRight: theme.spacing(3),
+
+    fontSize: '1rem',
+  },
+  linkStyel: {
+    display: 'flex',
+    justifyContent: 'center',
   },
 }));

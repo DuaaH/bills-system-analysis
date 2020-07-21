@@ -6,7 +6,7 @@ const {
 const { updateInfo } = require('../../database/query/User/updateUser');
 
 module.exports = (req, res) => {
-  const id = 1;
+  const { id } = req.user;
   const userInfo = req.body;
   updateInfo(id, userInfo)
     .then((result) => {

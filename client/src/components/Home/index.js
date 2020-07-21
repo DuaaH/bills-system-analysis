@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { Grid, Box, Typography, Paper, IconButton } from '@material-ui/core';
 import { AddCircleOutline } from '@material-ui/icons';
@@ -11,7 +10,7 @@ import Electricity from '../../assets/electricity.svg';
 import Internet from '../../assets/internet.svg';
 import Styles from './style';
 
-export default () => {
+export default (props) => {
   const classes = Styles();
   const [userBillType, setUserBillType] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +32,7 @@ export default () => {
       })
       .catch((err) => {
         if (err.response.data) {
-          swal('Error', err.response.data.message, 'error');
+          props.history.push('/login');
         }
         setIsLoading(false);
         setIsDisplayBlock(true);

@@ -19,14 +19,14 @@ import {
   List,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import LoaderProgress from '../../common-components/LoaderProgress';
-import Style from './style';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme as theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
+import Style from './style';
+import LoaderProgress from '../../common-components/LoaderProgress';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -192,7 +192,9 @@ export default (props) => {
         <Grid container item xs={12} justify="center">
           <Grid item container xs={12}>
             <Typography variant="h4" color="textPrimary" align="left">
-              Electricity bill
+              {props.match.params.bill_type.charAt(0).toUpperCase()
+                + props.match.params.bill_type.slice(1)}{' '}
+              Bill
             </Typography>
           </Grid>
           <Grid

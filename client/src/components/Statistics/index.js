@@ -36,7 +36,7 @@ const data = {
 
 export default (props) => {
   const classes = Styles();
-
+  console.log(props);
   const [chartData, setChartData] = useState({});
   const [historyBill, setHistoryBill] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -132,7 +132,7 @@ export default (props) => {
         <Grid container item sx={12} justify="center">
           <Grid item container xs={12}>
             <Typography variant="h4" color="textPrimary" align="left">
-              {props.title}
+              {props.title} Bill
             </Typography>
           </Grid>
 

@@ -32,7 +32,10 @@ export default () => (
               path="/bill/:bill_type/statistics/:billId"
               component={(props) => (
                 <Statistics
-                  title="Electricity Bill"
+                  title={
+                    props.match.params.bill_type.charAt(0).toUpperCase()
+                    + props.match.params.bill_type.slice(1)
+                  }
                   providerName="Hebron electric power"
                   {...props}
                 />

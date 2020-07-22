@@ -110,6 +110,7 @@ const PersonalInfo = () => {
       })
       .catch((err) => {
         if (err && err.response && err.response.data) {
+          swal('Error', err.response.data.message, 'error');
         }
         setIsLoading(false);
       });
@@ -164,7 +165,7 @@ const PersonalInfo = () => {
       })
       .catch((err) => {
         if (err && err.response && err.response.data) {
-          console.log(err);
+          swal('Error', err.response.data.message, 'error');
         }
         setIsLoading(false);
       });
@@ -183,6 +184,7 @@ const PersonalInfo = () => {
       })
       .catch((err) => {
         if (err && err.response && err.response.data) {
+          swal('Error', err.response.data.message, 'error');
         }
         setIsLoading(false);
       });

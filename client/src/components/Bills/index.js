@@ -82,7 +82,6 @@ export default (props) => {
             .get(`/api/providers/getProviderById/${providerId}`)
             .then((resultData) => {
               setProviderInfo(resultData.data.Result[0]);
-              console.log(resultData.data.Result);
             })
             .catch((err) => {
               if (err.response.data) {

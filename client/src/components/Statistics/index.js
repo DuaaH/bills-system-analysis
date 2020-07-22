@@ -36,7 +36,6 @@ const data = {
 
 export default (props) => {
   const classes = Styles();
-  console.log(props);
   const [chartData, setChartData] = useState({});
   const [historyBill, setHistoryBill] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

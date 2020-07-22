@@ -27,7 +27,7 @@ export default makeStyles((theme) => ({
     textAlign: 'right',
   },
   root: {
-    paddingTop: '10px',
+    paddingTop: '2px',
   },
   LineHorizantal: {
     width: '100%',
@@ -40,13 +40,10 @@ export default makeStyles((theme) => ({
   inputText: {
     backgroundColor: '#616161',
     padding: '0 8px',
-    
     width: '100px',
     [theme.breakpoints.down('lg')]: { width: 200 },
     [theme.breakpoints.down('sm')]: { width: 100 },
   },
-
-  
  errorTitle: {
   textAlign: 'right',
   },

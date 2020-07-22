@@ -231,7 +231,7 @@ const PersonalInfo = () => {
             <InputLabel className={classes.root}> Name</InputLabel>
           </Grid>
 
-          <Grid item xs={6} className={classes.gridPosition}>
+          <Grid  xs={6} className={classes.gridPosition}>
             <Input
               name="displayName"
               className={classes.text}
@@ -243,8 +243,8 @@ const PersonalInfo = () => {
             />
           </Grid>
         </Grid>
-        <Grid xs={12} item  container className={classes.errorTitle} justify="flex-start">
-          <FormControl error className={classes.errorTitle}>
+        <Grid xs={12} item  className={classes.errorTitle} >
+          <FormControl error >
             <FormHelperText className={classes.textError}>
               {userInfo.displayName.message}
             </FormHelperText>
@@ -268,8 +268,8 @@ const PersonalInfo = () => {
             />
           </Grid>
         </Grid>
-        <Grid xs={12}  container item className={classes.errorTitle} justify="flex-start">
-          <FormControl error className={classes.errorTitle}>
+        <Grid xs={12}   item className={classes.errorTitle}>
+          <FormControl error >
             <FormHelperText className={classes.textError}>
               {userInfo.mobile.message}
             </FormHelperText>
@@ -298,7 +298,7 @@ const PersonalInfo = () => {
             >
               <option
                 value=""
-                style={({ background: '#505050' }, { textAlign: 'right' })}
+                style={({ background: '#505050' })}
               ></option>
               {address.map((type, index) => (
                 <option
@@ -313,7 +313,7 @@ const PersonalInfo = () => {
             <Grid
               xs={12}
               item
-              container 
+             
               className={classes.errorTitle}
               justify="flex-start"
             >
@@ -353,8 +353,8 @@ const PersonalInfo = () => {
             </NativeSelect>
           </Grid>
         </Grid>
-        <Grid xs={12}  container item className={classes.errorTitle} justify="flex-start">
-          <FormControl error className={classes.errorTitle}>
+        <Grid xs={12}  item className={classes.errorTitle} >
+          <FormControl error >
             <FormHelperText className={classes.textError}>
               {userInfo.townName.message}
             </FormHelperText>
@@ -407,8 +407,8 @@ const PersonalInfo = () => {
           </Grid>
         </Grid>
 
-        <Grid xs={12} item container  className={classes.errorTitle} justify="flex-start">
-          <FormControl error className={classes.errorTitle}>
+        <Grid xs={12} item  className={classes.errorTitle} >
+          <FormControl error >
             <FormHelperText className={classes.textError}>
               {userInfo.numberOfindivisuals.message}
             </FormHelperText>
@@ -441,8 +441,8 @@ const PersonalInfo = () => {
             </NativeSelect>
           </Grid>
         </Grid>
-        <Grid xs={12} item  container className={classes.errorTitle} justify="flex-start">
-          <FormControl error className={classes.errorTitle}>
+        <Grid xs={12} item  className={classes.errorTitle} >
+          <FormControl error >
             <FormHelperText className={classes.textError}>
               {userInfo.status.message}
             </FormHelperText>
@@ -490,8 +490,8 @@ const PersonalInfo = () => {
           </Grid>
         </Grid>
 
-        <Grid xs={12} item  container className={classes.errorTitle} justify="flex-start">
-          <FormControl error className={classes.errorTitle}>
+        <Grid xs={12} item className={classes.errorTitle} >
+          <FormControl error >
             <FormHelperText className={classes.textError}>
               {userInfo.numberOfDevices.message}
             </FormHelperText>

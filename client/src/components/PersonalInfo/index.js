@@ -17,7 +17,7 @@ import Styles from './style';
 import Group from '../../assets/Group.svg';
 import NumericInput from 'react-numeric-input';
 
-const PersonalInfo = () => {
+const PersonalInfo = (props) => {
   const classes = Styles();
   const [information, setInformation] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -173,8 +173,14 @@ const PersonalInfo = () => {
 
   useEffect(() => {
     axios.get('/api/profile').then((res) => {
-      setInformation(res.data.Result);
+        setInformation(res.data.Result);
       setIsLoading(false);
+    })
+    .catch((err) => {
+      setIsLoading(false);
+      if (err && err.response && err.response.data) {
+        props.history.push('/login');
+      }
     });
     axios
       .get(`/api/address`)

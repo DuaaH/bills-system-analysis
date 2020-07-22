@@ -72,11 +72,10 @@ export default (props) => {
         }
       })
       .catch((err) => {
-        if (err && err.response && err.response.data) {
-          swal('Error', err.response.data.message, 'error');
-        }
         setIsLoading(false);
-        console.log(err);
+        if (err && err.response && err.response.data) {
+          props.history.push('/login');
+        }
       });
   }, []);
 

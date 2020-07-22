@@ -27,7 +27,7 @@ import LoaderProgress from '../../common-components/LoaderProgress';
 import Styles from './style';
 import { tr } from 'date-fns/locale';
 
-export default () => {
+export default (props) => {
   const classes = Styles();
   const [minDate, setMinDate] = useState();
   const [maxDate, setMaxDate] = useState(new Date());
@@ -127,7 +127,7 @@ export default () => {
       })
       .catch((err) => {
         if (err && err.response && err.response.data) {
-          swal('Error', err.response.data.message, 'error');
+          props.history.push('/login');
         }
         setIsLoading(false);
       });

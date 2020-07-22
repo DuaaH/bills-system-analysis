@@ -7,7 +7,8 @@ const {
 const { updateInfo } = require('../../database/query/User/updateUser');
 const { personalInfoValidation}= require('../../helpers/Validation')
 module.exports = (req, res) => {
-  const id = 3;
+  const { id } = req.user;
+
   const userInfo = req.body;
   const { error } = personalInfoValidation(userInfo);
   if (error) {

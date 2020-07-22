@@ -38,11 +38,7 @@ export default () => (
               exact
               path="/bill/:bill_type/statistics/:billId"
               component={(props) => (
-                <Statistics
-                  title="Electricity Bill"
-                  providerName="Hebron electric power"
-                  {...props}
-                />
+                <Statistics title="Electricity Bill" {...props} />
               )}
             />
             <Route component={Error404} />

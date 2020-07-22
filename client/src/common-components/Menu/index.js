@@ -20,7 +20,7 @@ import ReceiptRoundedIcon from '@material-ui/icons/ReceiptRounded';
 import PersonIcon from '@material-ui/icons/Person';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import LoaderProgress from '../../common-components/LoaderProgress';
+import LoaderProgress from '../LoaderProgress';
 import swal from 'sweetalert';
 import axios from 'axios';
 import { useState} from 'react';
@@ -118,22 +118,22 @@ export default (props) =>{
     {
       text: 'Home',
       icon: <HomeIcon  style={{color: 'white'}}/>,
-      onClick: () => history.push('/'),
+      onClick: () => window.location.replace('/'),
     },
     {
       text: 'Bill',
       icon: <ReceiptRoundedIcon style={{color: 'white'}} />,
-      onClick: () => history.push('/home'),
+      onClick: () => window.location.replace('/home'),
     },
     {
       text: 'Profile',
       icon: <PersonIcon  style={{color: 'white'}}/>,
-      onClick: () => history.push('/profile'),
+      onClick: () => window.location.replace('/profile'),
     },
     {
       text: 'Add New Bill',
       icon: <AddCircleRoundedIcon  style={{color: 'white'}}/>,
-      onClick: () => history.push('/new-bill'),
+      onClick: () => window.location.replace('/new-bill'),
     },
     {
       text: 'Log Out',
@@ -151,8 +151,8 @@ export default (props) =>{
         })}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap className={classes.title}>
-            Persistent drawer
+          <Typography variant="h4" noWrap className={classes.title}>
+            {props.title}
           </Typography>
           <IconButton
             color="inherit"

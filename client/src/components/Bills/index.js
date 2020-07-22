@@ -27,6 +27,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import Style from './style';
 import LoaderProgress from '../../common-components/LoaderProgress';
+import Menu from '../../common-components/Menu';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -187,19 +188,13 @@ export default (props) => {
     });
   };
   const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
-
+  const title = props.match.params.bill_type.charAt(0).toUpperCase()+ props.match.params.bill_type.slice(1) + ' Bill'
   return (
     <Box component="div" p={3} width={1}>
       <LoaderProgress isLoading={isLoading} />
       <Box component="div" display={displayStatus} width={1}>
         <Grid container item xs={12} justify="center">
-          <Grid item container xs={12}>
-            <Typography variant="h4" color="textPrimary" align="left">
-              {props.match.params.bill_type.charAt(0).toUpperCase()
-                + props.match.params.bill_type.slice(1)}{' '}
-              Bill
-            </Typography>
-          </Grid>
+          <Menu title={title} />
           <Grid
             container
             item

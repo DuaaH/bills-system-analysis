@@ -9,6 +9,7 @@ import Communication from '../../assets/communication.svg';
 import Electricity from '../../assets/electricity.svg';
 import Internet from '../../assets/internet.svg';
 import Styles from './style';
+import Menu from '../../common-components/Menu';
 
 export default (props) => {
   const classes = Styles();
@@ -95,11 +96,7 @@ export default (props) => {
       <LoaderProgress isLoading={isLoading} />
       <Box component="div" display={displayStatus} width={1}>
         <Grid container item sx={12} justify="center">
-          <Grid item container xs={12}>
-            <Typography variant="h4" color="textPrimary" align="left">
-              Billbase
-            </Typography>
-          </Grid>
+          <Menu title="Billbase" />
           <Grid
             container
             item

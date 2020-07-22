@@ -35,6 +35,7 @@ const data = {
 };
 
 export default (props) => {
+  const providerName = JSON.parse(localStorage.getItem('providerName'));
   const classes = Styles();
   const [chartData, setChartData] = useState({});
   const [historyBill, setHistoryBill] = useState([]);
@@ -146,7 +147,7 @@ export default (props) => {
           >
             <Box width={1} mt={3}>
               <Typography variant="caption" color="textPrimary" align="left">
-                {props.providerName}
+                {providerName}
               </Typography>
             </Box>
             <Box width={1} className={classes.chartPaper} mt={1}>

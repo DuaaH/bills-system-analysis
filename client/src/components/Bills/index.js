@@ -104,6 +104,7 @@ export default (props) => {
         setIsDisplayBlock(true);
       });
   }, []);
+  localStorage.setItem('providerName', JSON.stringify(providerInfo.name));
   const buildBillBanel = (lastBill) => {
     if (!lastBill) {
       return [];
@@ -171,7 +172,10 @@ export default (props) => {
               />
               <Box component="span" className={classes.statisticsLink}>
                 <Link
-                  to={`/bill/${props.match.params.bill_type}/statistics/${bill.gid}`}
+                  to={{
+                    pathname: `/bill/${props.match.params.bill_type}/statistics/${bill.gid}`,
+                    data: { providerName: providerInfo.name },
+                  }}
                 >
                   Statistics
                 </Link>

@@ -35,8 +35,8 @@ const data = {
 };
 
 export default (props) => {
+  const providerName = JSON.parse(localStorage.getItem('providerName'));
   const classes = Styles();
-
   const [chartData, setChartData] = useState({});
   const [historyBill, setHistoryBill] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -131,7 +131,7 @@ export default (props) => {
         <Grid container item sx={12} justify="center">
           <Grid item container xs={12}>
             <Typography variant="h4" color="textPrimary" align="left">
-              {props.title}
+              {props.title} Bill
             </Typography>
           </Grid>
 
@@ -146,7 +146,7 @@ export default (props) => {
           >
             <Box width={1} mt={3}>
               <Typography variant="caption" color="textPrimary" align="left">
-                {props.providerName}
+                {providerName}
               </Typography>
             </Box>
             <Box width={1} className={classes.chartPaper} mt={1}>

@@ -127,7 +127,7 @@ export default () => {
       })
       .catch((err) => {
         if (err && err.response && err.response.data) {
-          swal('Error', err.response.data.message, 'error');
+          props.history.push('/login');
         }
         setIsLoading(false);
       });

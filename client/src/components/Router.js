@@ -5,11 +5,8 @@ import LandingPage from './LandingPage';
 import Signup from './Signup';
 import Login from './Login';
 import Home from './Home';
-<<<<<<< HEAD
 import PersonalInfo from './PersonalInfo';
-=======
 import Statistics from './Statistics';
->>>>>>> master
 
 export default () => (
   <Router>

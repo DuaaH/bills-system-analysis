@@ -32,7 +32,7 @@ export default () => {
                 className={classes.button}
               >
                 <Link color="inherit" href="/signup">
-                  Sign up
+                  Sign Up
                 </Link>
               </Button>
             </Grid>

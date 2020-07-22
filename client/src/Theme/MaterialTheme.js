@@ -17,4 +17,22 @@ export default createMuiTheme({
       link: '#FFFFFF',
     },
   },
+  overrides: {
+    MuiPickersBasePicker: {
+      pickerView: {
+        backgroundColor: '#616161',
+      },
+    },
+    MuiPickersDay: {
+      daySelected: {
+        color: 'light-gray',
+      },
+      current: {
+        color: 'black',
+      },
+      daySelected: {
+        backgroundColor: '#61989F',
+      },
+    },
+  },
 });

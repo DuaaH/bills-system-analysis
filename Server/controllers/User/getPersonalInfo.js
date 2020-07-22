@@ -3,12 +3,11 @@ const {
   internalErrorMessage,
 } = require('../../helpers/responseMessage');
 const { getPersonalInfo } = require('../../database/query/User');
+
 module.exports = (req, res) => {
-  const id = 1;
+  const { id } = req.user;
   getPersonalInfo(id)
-    .then((result) => {
-      return res.status(200).json(successMessage(result.rows[0]));
-    })
+    .then((result) => res.status(200).json(successMessage(result.rows[0])))
     .catch((err) => {
       console.log('Error in get personal information of current user ', err);
       return res

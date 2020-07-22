@@ -1,5 +1,5 @@
 import React from 'react';
-import Style from './Style';
+import Style from './style';
 import { Grid, Box, Typography, Button, Link } from '@material-ui/core';
 
 export default () => {

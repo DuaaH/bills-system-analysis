@@ -51,5 +51,17 @@ const validatesignupInfo = (userData) => {
   });
   return schema.validate(userData);
 };
+const personalInfoValidation = (userInfo) => {
+  const schema = joi.object({
+   display_name: joi.string().required(),
+   phone:joi.string().required(),
+   city: joi.string().required(),
+   town: joi.string().required(),
+    personal_status: joi.string().required(),
+    number_of_individuals:joi.number().required(),
+    number_of_devices: joi.number().required(),
+  });
+  return schema.validate(userInfo);
+};
 
-module.exports = { validateEmail, validateLoginInfo, validatesignupInfo };
+module.exports = { validateEmail, validateLoginInfo, validatesignupInfo ,personalInfoValidation };

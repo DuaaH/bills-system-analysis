@@ -107,6 +107,7 @@ function SignUp(props) {
                     disableUnderline: true,
                   }}
                   fullWidth
+                  autoComplete="off"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -124,6 +125,7 @@ function SignUp(props) {
                     disableUnderline: true,
                   }}
                   fullWidth
+                  autoComplete="off"
                 />
               </Grid>
               <Grid item xs={12}>

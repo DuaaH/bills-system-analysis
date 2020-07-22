@@ -1,5 +1,5 @@
 import React from 'react';
-import Style from './Style';
+import Style from './style';
 import { Grid, Box, Typography, Button, Link } from '@material-ui/core';
 
 export default () => {
@@ -32,7 +32,7 @@ export default () => {
                 className={classes.button}
               >
                 <Link color="inherit" href="/signup">
-                  Sign up
+                  Sign Up
                 </Link>
               </Button>
             </Grid>

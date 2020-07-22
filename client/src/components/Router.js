@@ -5,8 +5,12 @@ import LandingPage from './LandingPage';
 import Signup from './Signup';
 import Login from './Login';
 import Home from './Home';
+
+import PersonalInfo from './PersonalInfo';
+
 import NewBill from './NewBill';
 import Bill from './Bills';
+
 import Statistics from './Statistics';
 import Error404 from './Errors/Error404';
 
@@ -24,6 +28,9 @@ export default () => (
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Home} />
+
+            <Route exact path="/profile" component={PersonalInfo} />
+
             <Route exact path="/new-bill" component={NewBill} />
             <Route exact path="/bill/:bill_type" component={Bill} />
 

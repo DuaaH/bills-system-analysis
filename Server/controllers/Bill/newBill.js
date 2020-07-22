@@ -8,7 +8,7 @@ const { newBillValidation } = require('../../helpers/Validation');
 const { newBill } = require('../../database/query/Bills');
 
 module.exports = (req, res) => {
-  const user_id = 1;
+  const user_id = req.user.id;
 
   const billData = !req.body ? null : req.body;
 

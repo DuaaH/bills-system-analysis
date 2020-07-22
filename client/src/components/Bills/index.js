@@ -58,7 +58,7 @@ function a11yProps(index) {
 export default (props) => {
   const classes = Style();
   const [value, setValue] = React.useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [displayBlock, setIsDisplayBlock] = useState(false);
   const [lastBill, setLastBill] = useState([]);
   const [providerInfo, setProviderInfo] = useState({});

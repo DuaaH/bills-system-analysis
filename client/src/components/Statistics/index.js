@@ -72,11 +72,10 @@ export default (props) => {
         }
       })
       .catch((err) => {
+        setIsLoading(false);
         if (err && err.response && err.response.data) {
           props.history.push('/login');
         }
-        setIsLoading(false);
-        console.log(err);
       });
   }, []);
 

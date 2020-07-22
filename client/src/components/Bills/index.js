@@ -99,7 +99,7 @@ export default (props) => {
       })
       .catch((err) => {
         if (err.response.data) {
-          swal('Error', err.response.data.message, 'error');
+          props.history.push('/login');
         }
         setIsLoading(false);
         setIsDisplayBlock(true);

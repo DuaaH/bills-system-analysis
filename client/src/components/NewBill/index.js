@@ -68,7 +68,7 @@ export default () => {
     },
     toDate: {
       value: new Date(),
-      lable: 'Type of bill',
+      lable: 'To',
       message: '',
       isValid: true,
       isRequired: true,

@@ -1,5 +1,11 @@
 const router = require('express').Router();
-const { getLastBill, getUserBillType, getBillStatistics } = require('./Bill');
+const {
+  getLastBill,
+  getUserBillType,
+  getBillStatistics,
+  newBill,
+  getBillType,
+} = require('./Bill');
 const { logIn } = require('./User');
 const { getPersonalInfo } = require('./User');
 const updateUser = require('./User/updateUser');
@@ -7,7 +13,7 @@ const getAddressByCity = require('./Address/getAddressByCity');
 const getAllAddresses = require('./Address/getAllAdresses');
 const { signUp } = require('./User');
 const authentication = require('../middlewares/authentication');
-const { getProviderById } = require('./Provider');
+const { getProviderById, getProviderByType } = require('./Provider');
 
 router.get(
   '/api/bill/:bill_type/statistics/:billId',
@@ -17,6 +23,11 @@ router.get(
 router.get('/api/bill/getBillByType/:bill_type', authentication, getLastBill);
 router.post('/api/login', logIn);
 router.get('/api/home', authentication, getUserBillType);
+
+router.get('/api/getBillType', getBillType);
+router.get('/api/providers/getProviders/:bill_type', getProviderByType);
+
+router.post('/api/new-bill', newBill);
 
 router.get('/api/profile', authentication, getPersonalInfo);
 router.get('/api/home', authentication, getUserBillType);

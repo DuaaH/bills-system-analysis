@@ -1,14 +1,28 @@
 const {
   successMessage,
   internalErrorMessage,
+  failedMessage,
 } = require('../../helpers/responseMessage');
 
 const { updateInfo } = require('../../database/query/User/updateUser');
-
+const { personalInfoValidation}= require('../../helpers/Validation')
 module.exports = (req, res) => {
   const { id } = req.user;
+
   const userInfo = req.body;
+  const { error } = personalInfoValidation(userInfo);
+  if (error) {
+    return res
+      .status(400)
+      .json(
+        failedMessage(
+          null,
+          `Oops ! ${error.toString().replace('ValidationError:', '')}`,
+        ),
+      );
+  }
   updateInfo(id, userInfo)
+
     .then((result) => {
       return res.status(200).json(successMessage(result.rows));
     })

@@ -26,10 +26,14 @@ module.exports = (req, res) => {
   const { error } = validatesignupInfo(userData);
 
   if (error) {
-    const errorMessage = error.toString().includes('[ref:password]')
-      ? "Passwords didn't match. Try again."
-      : error.toString().replace('ValidationError:', '');
-
+    let errorMessage = '';
+    if (error.toString().includes('[ref:password]')) {
+      errorMessage = "Passwords didn't match. Try again.";
+    } else if (error.toString().includes('^[a-zA-Z0-9]{3,30}$')) {
+      errorMessage = 'Passwords must contains only capital, small letters or numbers. Please enter new one.';
+    } else {
+      error.toString().replace('ValidationError:', '');
+    }
     return res.status(400).json(failedMessage(null, errorMessage));
   }
 

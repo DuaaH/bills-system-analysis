@@ -7,6 +7,5 @@ module.exports = (id) => {
           WHERE id=$1 `,
     values: [id],
   };
-  console.log(sql);
   return connection.query(sql.text, sql.values);
 };

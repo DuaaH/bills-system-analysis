@@ -125,13 +125,13 @@ export default (props) => {
 
   const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
   const displayHistory = !historyBill || !historyBill.length ? 'none' : 'block';
-
+  const title = props.match.params.bill_type.charAt(0).toUpperCase()+ props.match.params.bill_type.slice(1) + ' Bill';
   return (
     <Box component="div" p={3} width={1}>
       <LoaderProgress isLoading={isLoading} />
       <Box component="div" width={1} display={displayStatus}>
         <Grid container item sx={12} justify="center">
-          <Menu title={props.title} />
+          <Menu title={title} />
           <Grid
             container
             item

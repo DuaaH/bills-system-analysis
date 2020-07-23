@@ -29,7 +29,7 @@ function SignUp(props) {
   };
 
   const validateUserName = () => {
-    const re = new XRegExp(/^[A-Za-z_ ]{3,30}$/);
+    const re = new XRegExp(/^[A-Za-z_0-9 ]{3,30}$/);
     return re.test(String(userName).toLowerCase());
   };
 
@@ -48,7 +48,7 @@ function SignUp(props) {
     }
     if (!validateUserName(userName)) {
       return setMessage(
-        'User Name must contains only capital or small letters or underscore(_) or space',
+        'User Name must contains only capital or small letters or underscore(_) or space or numbers',
       );
     }
     if (!password) {

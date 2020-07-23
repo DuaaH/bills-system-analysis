@@ -22,11 +22,11 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+import { tr } from 'date-fns/locale';
 import LoaderProgress from '../../common-components/LoaderProgress';
 import Menu from '../../common-components/Menu';
 
 import Styles from './style';
-import { tr } from 'date-fns/locale';
 
 export default (props) => {
   const classes = Styles();
@@ -233,10 +233,9 @@ export default (props) => {
           return;
         }
         clearDataField();
-        swal('Good job!', "'Bill added succesfully", 'success');
+        swal('Good job!', 'Bill added succesfully', 'success');
       })
       .catch((error) => {
-        console.log('error : ', { ...error });
         setIsLoading(false);
         if (error.response.data) {
           swal('Error', error.response.data.message, 'error');
@@ -246,7 +245,6 @@ export default (props) => {
 
   const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
 
-  // console.log('Bill Data : ', billData);
   return (
     <Box component="div" pt={3} width={1}>
       <LoaderProgress isLoading={isLoading} />
@@ -388,7 +386,7 @@ export default (props) => {
                         name="billDate"
                         label={billData.billDate.lable}
                         format="MM/dd/yyyy"
-                        value={fields['billDate']}
+                        value={fields.billDate}
                         onChange={(value) =>
                           handleDateChange('billDate', value)
                         }
@@ -409,7 +407,7 @@ export default (props) => {
                         id="dueDate"
                         name="dueDate"
                         format="MM/dd/yyyy"
-                        value={fields['dueDate']}
+                        value={fields.dueDate}
                         onChange={(value) => handleDateChange('dueDate', value)}
                         minDate={minDate}
                         maxDate={maxDate}
@@ -429,7 +427,7 @@ export default (props) => {
                         name="fromDate"
                         label={billData.fromDate.lable}
                         format="MM/dd/yyyy"
-                        value={fields['fromDate']}
+                        value={fields.fromDate}
                         onChange={(value) =>
                           handleDateChange('fromDate', value)
                         }
@@ -450,7 +448,7 @@ export default (props) => {
                         format="MM/dd/yyyy"
                         label={billData.toDate.lable}
                         style={{ color: '#000' }}
-                        value={fields['toDate']}
+                        value={fields.toDate}
                         onChange={(value) => handleDateChange('toDate', value)}
                         minDate={minDate}
                         maxDate={maxDate}

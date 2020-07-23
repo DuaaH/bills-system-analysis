@@ -132,7 +132,7 @@ export default (props) => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails className={classes.conentFont}>
-            <Grid item container alignItems="flex-end">
+            <Grid item container justify="space-around" alignItems="flex-end">
               <TextField
                 className={classes.textFieldStyle}
                 disabled

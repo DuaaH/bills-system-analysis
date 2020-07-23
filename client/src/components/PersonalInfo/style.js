@@ -10,20 +10,16 @@ export default makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     marginLeft: '130px',
     marginTop: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {marginLeft: 90 },
-
+    [theme.breakpoints.down('sm')]: { marginLeft: 90 },
   },
   updateButt: {
     width: '100%',
   },
   addPosition: {
-    
-    display:'block',
+    display: 'block',
     textAlign: 'right',
-   
-   
   },
-  gridPosition: {    
+  gridPosition: {
     textAlign: 'right',
   },
   root: {
@@ -32,11 +28,9 @@ export default makeStyles((theme) => ({
   LineHorizantal: {
     width: '100%',
   },
-  
-  labelStyle:{
-   marginRight:'15px',
-
-  } ,
+  labelStyle: {
+    marginRight: '15px',
+  },
   inputText: {
     backgroundColor: '#616161',
     padding: '0 8px',
@@ -44,8 +38,7 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down('lg')]: { width: 200 },
     [theme.breakpoints.down('sm')]: { width: 100 },
   },
- errorTitle: {
-  textAlign: 'right',
+  errorTitle: {
+    textAlign: 'right',
   },
-  
 }));

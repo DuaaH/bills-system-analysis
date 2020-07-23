@@ -17,9 +17,6 @@ import Error404 from './Errors/Error404';
 export default () => (
   <Router>
     <Grid direction="column" container>
-      <Grid item xs={12}>
-        {/* Header */}
-      </Grid>
       <Grid item container>
         <Grid item xs={false} md={3} />
         <Grid item container xs={12} md={6}>

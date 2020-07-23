@@ -16,6 +16,5 @@ module.exports = (userId, billData) => {
       billData.billNumber,
     ],
   };
-  console.log(sql);
   return connection.query(sql.text, sql.values);
 };

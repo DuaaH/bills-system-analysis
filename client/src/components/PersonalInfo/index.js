@@ -12,10 +12,10 @@ import {
   FormHelperText,
   Button,
 } from '@material-ui/core';
+import NumericInput from 'react-numeric-input';
 import LoaderProgress from '../../common-components/LoaderProgress';
 import Styles from './style';
 import Group from '../../assets/Group.svg';
-import NumericInput from 'react-numeric-input';
 import Menu from '../../common-components/Menu';
 
 const PersonalInfo = (props) => {
@@ -67,7 +67,7 @@ const PersonalInfo = (props) => {
     },
     numberOfindivisuals: {
       value: information.number_of_individuals,
-      lable: ' number of devices',
+      lable: ' number of indivisuals',
       message: '',
       isValid: true,
       isRequired: true,
@@ -86,19 +86,19 @@ const PersonalInfo = (props) => {
   const status = ['', 'single', 'Married'];
 
   const handleUserChange = (event) => {
-    let form = { ...userInfo };
+    const form = { ...userInfo };
     form[event.target.name].value = event.target.value;
     setuserInfo(form);
   };
 
   const handleIndivisulaChange = (event) => {
-    let form = { ...userInfo };
-    form['numberOfindivisuals'].value = event;
+    const form = { ...userInfo };
+    form.numberOfindivisuals.value = event;
     setuserInfo(form);
   };
   const handleDeviceChange = (event) => {
-    let form = { ...userInfo };
-    form['numberOfDevices'].value = event;
+    const form = { ...userInfo };
+    form.numberOfDevices.value = event;
     setuserInfo(form);
   };
   const addressTypeHandleChange = (event) => {
@@ -159,7 +159,7 @@ const PersonalInfo = (props) => {
       town: userInfo.townName.value,
     };
     axios
-      .patch(`/api/update`, data)
+      .patch('/api/update', data)
       .then((res) => {
         setIsLoading(false);
         swal('Good Job', 'The data was suucceffuly updated ', 'success');
@@ -173,18 +173,20 @@ const PersonalInfo = (props) => {
   };
 
   useEffect(() => {
-    axios.get('/api/profile').then((res) => {
-        setInformation(res.data.Result);
-      setIsLoading(false);
-    })
-    .catch((err) => {
-      setIsLoading(false);
-      if (err && err.response && err.response.data) {
-        props.history.push('/login');
-      }
-    });
     axios
-      .get(`/api/address`)
+      .get('/api/profile')
+      .then((res) => {
+        setInformation(res.data.Result);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        if (err && err.response && err.response.data) {
+          props.history.push('/login');
+        }
+      });
+    axios
+      .get('/api/address')
       .then((res) => {
         setAllAddress(res.data.Result);
         setIsLoading(false);
@@ -197,27 +199,25 @@ const PersonalInfo = (props) => {
       });
   }, []);
   useEffect(() => {
-    setuserInfo((prevValue) => {
-      return {
-        ...prevValue,
-        displayName: {
-          ...prevValue.displayName,
-          value: information.display_name,
-        },
-        mobile: { ...prevValue.mobile, value: information.phone },
-        numberOfDevices: {
-          ...prevValue.numberOfDevices,
-          value: information.number_of_devices,
-        },
-        numberOfindivisuals: {
-          ...prevValue.numberOfindivisuals,
-          value: information.number_of_individuals,
-        },
-        status: { ...prevValue.status, value: information.personal_status },
-        townName: { ...prevValue.townName, value: information.town },
-        cityName: { ...prevValue.cityName, value: information.city },
-      };
-    });
+    setuserInfo((prevValue) => ({
+      ...prevValue,
+      displayName: {
+        ...prevValue.displayName,
+        value: information.display_name,
+      },
+      mobile: { ...prevValue.mobile, value: information.phone },
+      numberOfDevices: {
+        ...prevValue.numberOfDevices,
+        value: information.number_of_devices,
+      },
+      numberOfindivisuals: {
+        ...prevValue.numberOfindivisuals,
+        value: information.number_of_individuals,
+      },
+      status: { ...prevValue.status, value: information.personal_status },
+      townName: { ...prevValue.townName, value: information.town },
+      cityName: { ...prevValue.cityName, value: information.city },
+    }));
   }, [information]);
   return (
     <Box component="div" p={3} width={1}>
@@ -233,7 +233,7 @@ const PersonalInfo = (props) => {
             <InputLabel className={classes.root}> Name</InputLabel>
           </Grid>
 
-          <Grid  xs={6} className={classes.gridPosition}>
+          <Grid xs={6} className={classes.gridPosition}>
             <Input
               name="displayName"
               className={classes.text}
@@ -245,8 +245,8 @@ const PersonalInfo = (props) => {
             />
           </Grid>
         </Grid>
-        <Grid xs={12} item  className={classes.errorTitle} >
-          <FormControl error >
+        <Grid xs={12} item className={classes.errorTitle}>
+          <FormControl error>
             <FormHelperText className={classes.textError}>
               {userInfo.displayName.message}
             </FormHelperText>
@@ -270,8 +270,8 @@ const PersonalInfo = (props) => {
             />
           </Grid>
         </Grid>
-        <Grid xs={12}   item className={classes.errorTitle}>
-          <FormControl error >
+        <Grid xs={12} item className={classes.errorTitle}>
+          <FormControl error>
             <FormHelperText className={classes.textError}>
               {userInfo.mobile.message}
             </FormHelperText>
@@ -298,10 +298,6 @@ const PersonalInfo = (props) => {
               }}
               input={<Input />}
             >
-              <option
-                value=""
-                style={({ background: '#505050' })}
-              ></option>
               {address.map((type, index) => (
                 <option
                   key={index}
@@ -315,7 +311,6 @@ const PersonalInfo = (props) => {
             <Grid
               xs={12}
               item
-             
               className={classes.errorTitle}
               justify="flex-start"
             >
@@ -355,8 +350,8 @@ const PersonalInfo = (props) => {
             </NativeSelect>
           </Grid>
         </Grid>
-        <Grid xs={12}  item className={classes.errorTitle} >
-          <FormControl error >
+        <Grid xs={12} item className={classes.errorTitle}>
+          <FormControl error>
             <FormHelperText className={classes.textError}>
               {userInfo.townName.message}
             </FormHelperText>
@@ -409,8 +404,8 @@ const PersonalInfo = (props) => {
           </Grid>
         </Grid>
 
-        <Grid xs={12} item  className={classes.errorTitle} >
-          <FormControl error >
+        <Grid xs={12} item className={classes.errorTitle}>
+          <FormControl error>
             <FormHelperText className={classes.textError}>
               {userInfo.numberOfindivisuals.message}
             </FormHelperText>
@@ -443,8 +438,8 @@ const PersonalInfo = (props) => {
             </NativeSelect>
           </Grid>
         </Grid>
-        <Grid xs={12} item  className={classes.errorTitle} >
-          <FormControl error >
+        <Grid xs={12} item className={classes.errorTitle}>
+          <FormControl error>
             <FormHelperText className={classes.textError}>
               {userInfo.status.message}
             </FormHelperText>
@@ -492,8 +487,8 @@ const PersonalInfo = (props) => {
           </Grid>
         </Grid>
 
-        <Grid xs={12} item className={classes.errorTitle} >
-          <FormControl error >
+        <Grid xs={12} item className={classes.errorTitle}>
+          <FormControl error>
             <FormHelperText className={classes.textError}>
               {userInfo.numberOfDevices.message}
             </FormHelperText>

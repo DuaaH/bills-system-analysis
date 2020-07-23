@@ -20,15 +20,12 @@ export default makeStyles((theme) => ({
   gridPosition: {
     margin: `${theme.spacing(2)}px  0 `,
   },
-  inputGrid: {
-    // opacity: '0.5',
-    // borderBottom: '0.5px solid #F2F2F2',
-  },
   inputText: {
     backgroundColor: '#616161',
     padding: '0 8px',
-    width: 300,
-    [theme.breakpoints.down('sm')]: { width: 100 },
+    width: 200,
+    [theme.breakpoints.between('xs', 'md')]: { width: 150 },
+    [theme.breakpoints.between('md', 'xl')]: { width: 250 },
   },
 
   datePicker: {

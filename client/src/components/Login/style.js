@@ -32,7 +32,7 @@ export default makeStyles((theme) => ({
     height: '40px',
   },
   errorMessage: {
-    color: '#FFF',
+    color: '#F08080',
     marginBottom: '10%',
     marginLeft: '2%',
     width: '100%',

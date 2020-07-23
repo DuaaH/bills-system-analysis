@@ -1,7 +1,7 @@
 const connection = require('../../connection');
-const updateInfo = (id, userinfo) => {
-  return connection.query(
-   
+
+const updateInfo = (id, userinfo) =>
+  connection.query(
     'UPDATE users SET display_name =$2,phone=$3 ,personal_status =$4,number_of_individuals =$5 ,number_of_devices =$6,address_id=(select id from address where town=$8 AND city=$7) WHERE id=$1',
     [
       id,
@@ -14,5 +14,4 @@ const updateInfo = (id, userinfo) => {
       userinfo.town,
     ],
   );
-};
-module.exports = {updateInfo };
+module.exports = { updateInfo };

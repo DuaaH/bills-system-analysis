@@ -16,6 +16,7 @@ import LoaderProgress from '../../common-components/LoaderProgress';
 import Styles from './style';
 import Group from '../../assets/Group.svg';
 import NumericInput from 'react-numeric-input';
+import Menu from '../../common-components/Menu';
 
 const PersonalInfo = (props) => {
   const classes = Styles();
@@ -222,12 +223,7 @@ const PersonalInfo = (props) => {
     <Box component="div" p={3} width={1}>
       <LoaderProgress isLoading={isLoading} />
       <Grid container item sx={12}>
-        <Grid item container xs={6}>
-          <Typography variant="h4" color="textPrimary" align="left">
-            profile
-          </Typography>
-        </Grid>
-
+        <Menu title="Profile" />
         <Grid item container xs={12} justify="space-evenly" direction="row">
           <img src={Group} alt="user-profile" className={classes.image} />
         </Grid>

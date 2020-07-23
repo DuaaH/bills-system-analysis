@@ -23,6 +23,7 @@ import {
 } from '@material-ui/pickers';
 
 import LoaderProgress from '../../common-components/LoaderProgress';
+import Menu from '../../common-components/Menu';
 
 import Styles from './style';
 import { tr } from 'date-fns/locale';
@@ -251,16 +252,7 @@ export default (props) => {
       <LoaderProgress isLoading={isLoading} />
       <Box component="div" display={displayStatus} width={1}>
         <Grid container item sx={12} justify="center">
-          <Grid item container xs={12}>
-            <Typography
-              variant="h4"
-              color="textPrimary"
-              align="left"
-              className={classes.title}
-            >
-              New Bill
-            </Typography>
-          </Grid>
+          <Menu title="New Bill" />
           <Grid
             container
             item

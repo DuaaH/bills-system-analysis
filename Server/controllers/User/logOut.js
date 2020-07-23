@@ -1,5 +1,6 @@
-xports.logout = (req, res) => {
-  // clear cookie to logout 
-    res.clearCookie('token').sendStatus(200);
-  };
-  
+module.exports = (req, res) => {
+  res
+    .clearCookie('token')
+    .sendStatus(204)
+    .end(req.cookies.token);
+};

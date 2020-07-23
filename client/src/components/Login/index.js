@@ -46,6 +46,7 @@ function Login(props) {
         }
       })
       .catch((err) => {
+        console.log(err)
         setMessage(err.response.data.message);
       });
   };

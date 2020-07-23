@@ -17,6 +17,7 @@ import swal from 'sweetalert';
 import LoaderProgress from '../../common-components/LoaderProgress';
 import Ils from '../../assets/ils.svg';
 import Styles from './style';
+import Menu from '../../common-components/Menu';
 
 const data = {
   labels: [],
@@ -124,17 +125,13 @@ export default (props) => {
 
   const displayStatus = isLoading && !displayBlock ? 'none' : 'block';
   const displayHistory = !historyBill || !historyBill.length ? 'none' : 'block';
+
   return (
     <Box component="div" p={3} width={1}>
       <LoaderProgress isLoading={isLoading} />
       <Box component="div" width={1} display={displayStatus}>
         <Grid container item sx={12} justify="center">
-          <Grid item container xs={12}>
-            <Typography variant="h4" color="textPrimary" align="left">
-              {props.title} Bill
-            </Typography>
-          </Grid>
-
+          <Menu title={props.title} />
           <Grid
             container
             item

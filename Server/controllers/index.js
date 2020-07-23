@@ -6,7 +6,8 @@ const {
   newBill,
   getBillType,
 } = require('./Bill');
-const { logIn ,logOut  } = require('./User');
+const { logIn } = require('./User');
+const { logOut } = require('./User');
 const { getPersonalInfo } = require('./User');
 const updateUser = require('./User/updateUser');
 const getAddressByCity = require('./Address/getAddressByCity');
@@ -23,7 +24,6 @@ router.get(
 router.get('/api/bill/getBillByType/:bill_type', authentication, getLastBill);
 
 router.post('/api/login', logIn);
-router.post('/api/logout', logOut);
 router.get('/api/home', authentication, getUserBillType);
 router.get('/api/getBillType', getBillType);
 router.get('/api/providers/getProviders/:bill_type', getProviderByType);
@@ -36,5 +36,6 @@ router.get('/api/address', getAllAddresses);
 router.post('/api/signup', signUp);
 router.post('/api/login', logIn);
 router.get('/api/providers/getProviderById/:provider_id', getProviderById);
+router.get('/api/logout', logOut);
 
 module.exports = router;

@@ -56,7 +56,7 @@ const validatesignupInfo = (userData) => {
       .min(3)
       .max(30)
       .required()
-      .pattern(new RegExp('^[a-zA-Z_]')),
+      .pattern(new RegExp('^[a-zA-Z_0-9 ]')),
     password: joi
       .string()
       .min(8)

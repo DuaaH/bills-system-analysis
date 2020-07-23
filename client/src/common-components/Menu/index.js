@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -20,10 +20,9 @@ import ReceiptRoundedIcon from '@material-ui/icons/ReceiptRounded';
 import PersonIcon from '@material-ui/icons/Person';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import LoaderProgress from '../LoaderProgress';
 import swal from 'sweetalert';
 import axios from 'axios';
-import { useState} from 'react';
+import LoaderProgress from '../LoaderProgress';
 
 const drawerWidth = 240;
 
@@ -54,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-
   },
   drawerPaper: {
     width: drawerWidth,
@@ -86,26 +84,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default (props) =>{
+export default (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const logOut =()=>{
-    axios
-    .post('/api/logout')
-    .then((result) => {
-      window.location.replace('/');
-    })
-    .catch((err) => {
-      if (err && err.response && err.response.data) {
-        swal('Error', err.response.data.message, 'error');
-      }
-      setIsLoading(false);
-    });
-  
-   }
-   
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -117,28 +101,40 @@ export default (props) =>{
   const itemsList = [
     {
       text: 'Home',
-      icon: <HomeIcon  style={{color: 'white'}}/>,
+      icon: <HomeIcon style={{ color: 'white' }} />,
       onClick: () => window.location.replace('/'),
     },
     {
       text: 'Bill',
-      icon: <ReceiptRoundedIcon style={{color: 'white'}} />,
+      icon: <ReceiptRoundedIcon style={{ color: 'white' }} />,
       onClick: () => window.location.replace('/home'),
     },
     {
       text: 'Profile',
-      icon: <PersonIcon  style={{color: 'white'}}/>,
+      icon: <PersonIcon style={{ color: 'white' }} />,
       onClick: () => window.location.replace('/profile'),
     },
     {
       text: 'Add New Bill',
-      icon: <AddCircleRoundedIcon  style={{color: 'white'}}/>,
+      icon: <AddCircleRoundedIcon style={{ color: 'white' }} />,
       onClick: () => window.location.replace('/new-bill'),
     },
     {
       text: 'Log Out',
-      icon: <ExitToAppIcon style={{color: 'white'}}/>,
-      onClick: logOut(),
+      icon: <ExitToAppIcon style={{ color: 'white' }} />,
+      onClick: () => {
+        axios
+          .get('/api/logout')
+          .then((result) => {
+            window.location.replace('/');
+          })
+          .catch((err) => {
+            if (err && err.response && err.response.data) {
+              swal('Error', err.response.data.message, 'error');
+            }
+            setIsLoading(false);
+          });
+      },
     },
   ];
   return (
@@ -169,9 +165,7 @@ export default (props) =>{
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
-      >
-       
-      </main>
+      ></main>
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -183,7 +177,11 @@ export default (props) =>{
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronLeftIcon style={{color: 'white'}}/> : <ChevronRightIcon style={{color: 'white'}}/>}
+            {theme.direction === 'rtl' ? (
+              <ChevronLeftIcon style={{ color: 'white' }} />
+            ) : (
+              <ChevronRightIcon style={{ color: 'white' }} />
+            )}
           </IconButton>
         </div>
         <Divider />
@@ -201,4 +199,4 @@ export default (props) =>{
       </Drawer>
     </div>
   );
-}
+};

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
   title: {
-    marginBottom: '4%',
+    marginBottom: '1%',
     marginLeft: '4%',
     fontFamily: 'Roboto',
     fontstyle: 'normal',
@@ -15,8 +15,9 @@ export default makeStyles((theme) => ({
     height: '130px',
   },
   instructions: {
-    marginBottom: '4%',
     marginLeft: '4%',
+    marginRight: '4%',
+    marginBottom: '1%',
     fontFamily: 'Roboto',
     fontstyle: 'normal',
     fontWeight: 'bold',
@@ -24,7 +25,6 @@ export default makeStyles((theme) => ({
     lineHeight: '150%',
     display: 'flex',
     alignItems: 'flex-end',
-    width: '294px',
     height: '85px',
   },
   signUpBtn: {
@@ -45,13 +45,13 @@ export default makeStyles((theme) => ({
     height: '40px',
   },
   errorMessage: {
-    color: '#FFF',
+    color: '#F08080',
     marginBottom: '10%',
     marginLeft: '2%',
     width: '100%',
   },
   loginForm: {
     width: '100%',
-    margin: '8% 4% 10% 4%',
+    margin: '0 4% 10% 4%',
   },
 }));

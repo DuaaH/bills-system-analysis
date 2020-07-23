@@ -37,7 +37,7 @@ As a user I can add my information like (number of individuals, consumption of u
 
 ## Database Schema
 
-
+![Bill Db ](https://user-images.githubusercontent.com/53875090/88285219-5dbedf80-ccf7-11ea-8ea1-f8f676f1ec77.jpg)
 
 ## Setup the project
 

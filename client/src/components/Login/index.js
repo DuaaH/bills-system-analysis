@@ -29,8 +29,11 @@ function Login(props) {
   const handleForm = (e) => {
     e.preventDefault();
     const data = { email, password };
-    if (!email || !validateEmail(email)) {
+    if (!email) {
       return setMessage('You must Enter your email first!');
+    }
+    if (!validateEmail(email)) {
+      return setMessage('Make sure that you write your email correctly!');
     }
     if (!password) {
       return setMessage('You must enter passowrd!');

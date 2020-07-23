@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Box, Typography, Button, Link } from '@material-ui/core';
 import Style from './style';
 
-export default () => {
+export default (props) => {
   const classes = Style();
   return (
     <Box component="div" p={3} width={1}>
@@ -30,10 +30,9 @@ export default () => {
                 variant="contained"
                 color="secondary"
                 className={classes.button}
+                onClick={() => props.history.push('/signup')}
               >
-                <Link color="inherit" href="/signup">
-                  Sign Up
-                </Link>
+                Sign Up
               </Button>
             </Grid>
 
